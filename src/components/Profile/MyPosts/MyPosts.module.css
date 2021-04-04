@@ -1,0 +1,22 @@
+.heading {
+    color: crimson;
+    margin-left: 20px;
+}
+
+.add_post {
+    margin: 5px;
+    background-color: white;
+    border: 1px solid black;
+}
+
+.add_post textarea {
+    margin: 5px;
+}
+
+.add_post button {
+    margin: 5px;
+}
+
+.post {
+    margin-top: 30px;
+}

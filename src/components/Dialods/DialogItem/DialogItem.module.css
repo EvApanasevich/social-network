@@ -1,0 +1,17 @@
+.dialog {
+    padding: 5px;
+}
+
+.dialog img {
+    height: 50px;
+    border-radius: 50px;
+}
+
+.dialog a.active {
+    color: #ffed22;
+}
+
+.dialog a {
+    margin-left: 5px;
+    margin-right: 30px;
+}

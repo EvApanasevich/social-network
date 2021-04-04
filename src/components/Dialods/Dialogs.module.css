@@ -1,0 +1,50 @@
+.dialogs {
+    display: flex;
+}
+
+.dialog {
+    display: flex;
+}
+
+.dialogsItems {
+    margin: 5px;
+    border: 1px solid black;
+    background-color: white;
+}
+
+.dialogsItems a {
+    color: crimson;
+    text-decoration: none;
+}
+
+.dialogsItems a.active {
+    color: #aeaeae;
+    font-weight: bold;
+}
+
+.messages {
+    width: 100%;
+    margin: 5px 5px 5px 0px;
+    border: 1px solid black;
+    background-color: white;
+}
+
+.message_block {
+    display: block;
+    width: 100%;
+    margin-right: 5px;
+}
+
+.input_message {
+    display: flex;
+    margin: 5px 5px 5px 0px;
+    align-items: flex-end;
+}
+
+.input_message textarea {
+
+}
+
+.input_message button {
+    margin: 0 0 5px 5px;
+}

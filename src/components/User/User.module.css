@@ -1,0 +1,9 @@
+.user {
+    color: crimson;
+}
+
+.user img {
+    width: 50px;
+    margin-left: 5px;
+    border-radius: 50px;
+}
