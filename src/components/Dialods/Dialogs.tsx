@@ -10,17 +10,18 @@ type PropsType = {
     dispatch: (action: ActionsType) => void
 }
 
-export const Dialogs = (props: PropsType) => {
+export const Dialogs: React.FC<PropsType> = (props) => {
+    const {dialogPage, dispatch} = props
 
-    const dialogsItem = props.dialogPage.dialogs.map((d) => <DialogItem name={d.name} id={d.id}/>)
-    const messageElement = props.dialogPage.messages.map((m) => <Message message={m.message}/>)
+    const dialogsItem = dialogPage.dialogs.map((d) => <DialogItem name={d.name} id={d.id}/>)
+    const messageElement = dialogPage.messages.map((m) => <Message message={m.message} id={m.id}/>)
 
     const changeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
         const messageText = e.currentTarget.value
-        props.dispatch(changeMessageAC(messageText))
+        dispatch(changeMessageAC(messageText))
     }
 
-    const addMessage = () => props.dispatch(addMessageAC())
+    const addMessage = () => dispatch(addMessageAC())
 
     return (
         <div className={s.dialogs}>
@@ -35,7 +36,7 @@ export const Dialogs = (props: PropsType) => {
                 </div>
                 <div className={s.input_message}>
                     <div>
-                        <textarea onChange={changeMessage} value={props.dialogPage.newMessage}></textarea>
+                        <textarea onChange={changeMessage} value={dialogPage.newMessage}></textarea>
                     </div>
                     <div>
                         <ButtonOn onClickHandler={addMessage}  buttonName={'Send message'} />

@@ -16,20 +16,20 @@ type PropsType = {
 }
 
 export const App: React.FC<PropsType> = (props) => {
-
-    const state = props.store.getState()
+    const {store} = props
+    const state = store.getState()
 
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
                 <Header/>
                 <Navbar sidebar={state.sidebar}
-                        dispatch={props.store.dispatch.bind(props.store)}/>
+                        dispatch={store.dispatch.bind(store)}/>
                 <div className={'app-wrapper-content'}>
                     <Route path='/dialogs' render={() => <Dialogs dialogPage={state.dialogPage}
-                                                                  dispatch={props.store.dispatch.bind(props.store)}/>}/>
+                                                                  dispatch={store.dispatch.bind(store)}/>}/>
                     <Route path='/profile' render={() => <Profile profilePage={state.profilePage}
-                                                                  dispatch={props.store.dispatch.bind(props.store)}/>}/>
+                                                                  dispatch={store.dispatch.bind(store)}/>}/>
 
                     <Route path='/music' render={() => <Music/>}/>
                     <Route path='/news' render={() => <News/>}/>

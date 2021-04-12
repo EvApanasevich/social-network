@@ -2,20 +2,22 @@ import React from "react";
 import ava from "../../../../images/Avaimg.jpg"
 import s from "./Post.module.css"
 
-type PostProps = {
+type PropsType = {
     message: string
     likes: number
 }
 
-export const Post = (props: PostProps) => {
+export const Post: React.FC<PropsType> = (props) => {
+    const {message, likes} = props
+
     return (
         <div className={s.post_item}>
             <img src={ava}/>
             <span className={s.post}>
-                {props.message}
+                {message}
             </span>
             <span className={s.like}>
-                likes: {props.likes}
+                likes: {likes}
             </span>
         </div>
     )

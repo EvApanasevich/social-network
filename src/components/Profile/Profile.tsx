@@ -9,13 +9,15 @@ type PropsType = {
     dispatch: (action: ActionsType) => void
 }
 
-export const Profile = (props: PropsType) => {
+export const Profile: React.FC<PropsType> = (props) => {
+    const {profilePage, dispatch} = props
+
     return (
         <div className={s.content}>
             <ProfileInfo />
-            <MyPosts posts={props.profilePage.posts}
-                     newPost={props.profilePage.newPost}
-                     dispatch={props.dispatch}/>
+            <MyPosts posts={profilePage.posts}
+                     newPost={profilePage.newPost}
+                     dispatch={dispatch}/>
 
         </div>
     )

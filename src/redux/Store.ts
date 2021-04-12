@@ -80,11 +80,11 @@ export const store: StoreType = {
     _state: {
         profilePage: {
             posts: [
-                {id: 1, message: 'Hi, my friends!', likes: 15},
-                {id: 2, message: 'yo, yo', likes: 6},
-                {id: 3, message: 'ya-hu-how!', likes: 100}
+                {id: 1, message: 'Hi, my friends!', likes: 10},
+                {id: 2, message: 'yo, yo', likes: 5},
+                {id: 3, message: 'ya-hu-how!', likes: 7}
             ],
-            newPost: '',
+            newPost: ''
         },
         dialogPage: {
             dialogs: [
@@ -97,7 +97,7 @@ export const store: StoreType = {
                 {id: 2, message: 'How are you?'},
                 {id: 3, message: 'Good!'}
             ],
-            newMessage: '',
+            newMessage: ''
         },
         sidebar: {
             friends: [

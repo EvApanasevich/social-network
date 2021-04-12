@@ -1,10 +1,15 @@
-import mod from './Message.module.css'
+import s from './Message.module.css'
 
-type MessageProps = {
+type PropsType = {
     message: string
+    id: number
 }
 
-export const Message = (props: MessageProps) => {
-    return <div className={mod.message}>{props.message}</div>
+export const Message: React.FC<PropsType> = (props) => {
+    const {message, id} = props
+
+    return (
+        <div className={s.message}>{message}</div>
+    )
 }
 

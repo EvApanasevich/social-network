@@ -1,20 +1,22 @@
-import {FriendsType} from "../../redux/Store";
 import ava from '../../images/Avaimg.jpg'
-import mod from './User.module.css'
+import s from './User.module.css'
 
-export const User = (props: FriendsType) => {
+type PropsType = {
+    id: number
+    name: string
+}
+
+export const User: React.FC<PropsType> = (props) => {
+    const {id, name} = props
+
     return (
-        <div className={mod.user}>
-
+        <div className={s.user}>
             <div>
                 <img src={ava} />
             </div>
-
             <div>
-                {props.name}
+                {name}
             </div>
-
-
         </div>
     )
 }

@@ -1,7 +1,10 @@
 import s from './ProfileInfo.module.css';
 import React from "react";
 
-export const ProfileInfo = () => {
+type PropsType = {
+}
+
+export const ProfileInfo: React.FC<PropsType> = (props) => {
     return (
         <div className={s.info}>
             <div>
