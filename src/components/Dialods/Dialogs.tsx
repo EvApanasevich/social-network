@@ -1,14 +1,13 @@
 import s from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {changeNewMessage, DialogPageType} from "../../redux/State";
+import {ActionsType, addMessageAC, changeMessageAC, DialogPageType} from "../../redux/Store";
 import React, {ChangeEvent} from "react";
 import {ButtonOn} from "../../buttons/ButtonOn";
 
 type PropsType = {
     dialogPage: DialogPageType
-    addNewMessage: () => void
-    changeNewMessage: (messageText: string) => void
+    dispatch: (action: ActionsType) => void
 }
 
 export const Dialogs = (props: PropsType) => {
@@ -18,10 +17,10 @@ export const Dialogs = (props: PropsType) => {
 
     const changeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
         const messageText = e.currentTarget.value
-        props.changeNewMessage(messageText)
+        props.dispatch(changeMessageAC(messageText))
     }
 
-    const addMessage = () => props.addNewMessage()
+    const addMessage = () => props.dispatch(addMessageAC())
 
     return (
         <div className={s.dialogs}>

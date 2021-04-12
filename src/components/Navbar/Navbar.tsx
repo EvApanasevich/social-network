@@ -1,21 +1,21 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
 import s from "./Navbar.module.css"
-import {SidebarType} from "../../redux/State";
+import {ActionsType, changeShowFriendsAC, SidebarType} from "../../redux/Store";
 import {User} from "../User/User";
 import {ButtonOn} from "../../buttons/ButtonOn";
 
 
 type PropsType = {
     sidebar: SidebarType
-    changeShowFriends: (showFriends: boolean) => void
+    dispatch: (action: ActionsType) => void
 }
 
 export const Navbar: React.FC<PropsType> = (props) => {
-    const {sidebar, changeShowFriends} = props
+    const {sidebar, dispatch} = props
 
     const show = () => {
-        changeShowFriends(sidebar.showFriends)
+        dispatch(changeShowFriendsAC())
     }
     const friends = sidebar.friends.map((u) => <User id={u.id} name={u.name}/>)
 
@@ -46,8 +46,8 @@ export const Navbar: React.FC<PropsType> = (props) => {
 
                 </div>
 
-                {sidebar.showFriends === true ? <ButtonOn onClickHandler={show} buttonName={'hide friends'}/> :
-                                                <ButtonOn onClickHandler={show} buttonName={'show friends'}/>}
+                {sidebar.showFriends ? <ButtonOn onClickHandler={show} buttonName={'hide friends'}/> :
+                                       <ButtonOn onClickHandler={show} buttonName={'show friends'}/>}
             </div>
         </nav>
     )

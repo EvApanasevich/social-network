@@ -1,4 +1,4 @@
-import {FriendsType} from "../../redux/State";
+import {FriendsType} from "../../redux/Store";
 import ava from '../../images/Avaimg.jpg'
 import mod from './User.module.css'
 

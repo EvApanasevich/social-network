@@ -8,27 +8,28 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {Settings} from "./components/Settings/Settings";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
-import {addNewPost, changeNewText, addNewMessage, changeNewMessage, changeShowFriends, StateType} from "./redux/State";
+import {StoreType} from "./redux/Store";
 
 
 type PropsType = {
-    state: StateType
+    store: StoreType
 }
 
-export const App = (props: PropsType) => {
+export const App: React.FC<PropsType> = (props) => {
+
+    const state = props.store.getState()
+
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
                 <Header/>
-                <Navbar sidebar={props.state.sidebar}
-                        changeShowFriends={changeShowFriends}/>
+                <Navbar sidebar={state.sidebar}
+                        dispatch={props.store.dispatch.bind(props.store)}/>
                 <div className={'app-wrapper-content'}>
-                    <Route path='/dialogs' render={() => <Dialogs dialogPage={props.state.dialogPage}
-                                                                  addNewMessage={addNewMessage}
-                                                                  changeNewMessage={changeNewMessage}/>}/>
-                    <Route path='/profile' render={() => <Profile profilePage={props.state.profilePage}
-                                                                  changeNewText={changeNewText}
-                                                                  addNewPost={addNewPost}/>}/>
+                    <Route path='/dialogs' render={() => <Dialogs dialogPage={state.dialogPage}
+                                                                  dispatch={props.store.dispatch.bind(props.store)}/>}/>
+                    <Route path='/profile' render={() => <Profile profilePage={state.profilePage}
+                                                                  dispatch={props.store.dispatch.bind(props.store)}/>}/>
 
                     <Route path='/music' render={() => <Music/>}/>
                     <Route path='/news' render={() => <News/>}/>
