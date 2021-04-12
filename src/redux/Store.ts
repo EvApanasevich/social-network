@@ -44,53 +44,35 @@ export type FriendsType = {
     name: string
 }
 ////////////////////////////////////
-export type ActionsType = AddNewPostActionType | ChangeNewPostActionType | AddNewMessageActionType |
-    ChangeNewMessageActionType | ChangeShowFriendsActionType
+export type ActionsType = ReturnType<typeof addPostAC> | ReturnType<typeof changePostAC> | ReturnType<typeof addMessageAC> |
+                          ReturnType<typeof changeMessageAC> | ReturnType<typeof changeShowFriendsAC>
 
-type AddNewPostActionType = {
-    type: 'ADD-NEW-POST'
-}
-type ChangeNewPostActionType = {
-    type: 'CHANGE-NEW-POST'
-    postText: string
-}
-type AddNewMessageActionType = {
-    type: 'ADD-NEW-MESSAGE'
-}
-type ChangeNewMessageActionType = {
-    type: 'CHANGE-NEW-MESSAGE'
-    messageText: string
-}
-type ChangeShowFriendsActionType = {
-    type: 'CHANGE-SHOW-FRIENDS'
-}
-
-export const addPostAC = (): AddNewPostActionType => {
+export const addPostAC = () => {
     return {
         type: 'ADD-NEW-POST'
-    }
+    } as const
 }
-export const changePostAC = (postText: string): ChangeNewPostActionType => {
+export const changePostAC = (postText: string) => {
     return {
         type: "CHANGE-NEW-POST",
         postText: postText
-    }
+    } as const
 }
-export const addMessageAC = (): AddNewMessageActionType => {
+export const addMessageAC = () => {
     return {
         type: "ADD-NEW-MESSAGE"
-    }
+    } as const
 }
-export const changeMessageAC = (messageText: string): ChangeNewMessageActionType => {
+export const changeMessageAC = (messageText: string) => {
     return {
         type: 'CHANGE-NEW-MESSAGE',
         messageText: messageText
-    }
+    } as const
 }
-export const changeShowFriendsAC = (): ChangeShowFriendsActionType => {
+export const changeShowFriendsAC = () => {
     return {
         type: 'CHANGE-SHOW-FRIENDS'
-    }
+    } as const
 }
 
 
