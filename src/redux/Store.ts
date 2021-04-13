@@ -1,3 +1,7 @@
+import {addPostAC, changePostAC, profileReducer} from "./profilePageReducer";
+import {addMessageAC, changeMessageAC, dialogReducer} from "./dialogPageReducer";
+import {changeShowFriendsAC, sidebarReducer} from "./sidebarReducer";
+
 export type StoreType = {
     _state: StateType
     _rerenderTree: () => void
@@ -44,37 +48,12 @@ export type FriendsType = {
     name: string
 }
 ////////////////////////////////////
-export type ActionsType = ReturnType<typeof addPostAC> | ReturnType<typeof changePostAC> | ReturnType<typeof addMessageAC> |
-                          ReturnType<typeof changeMessageAC> | ReturnType<typeof changeShowFriendsAC>
-
-export const addPostAC = () => {
-    return {
-        type: 'ADD-NEW-POST'
-    } as const
-}
-export const changePostAC = (postText: string) => {
-    return {
-        type: "CHANGE-NEW-POST",
-        postText: postText
-    } as const
-}
-export const addMessageAC = () => {
-    return {
-        type: "ADD-NEW-MESSAGE"
-    } as const
-}
-export const changeMessageAC = (messageText: string) => {
-    return {
-        type: 'CHANGE-NEW-MESSAGE',
-        messageText: messageText
-    } as const
-}
-export const changeShowFriendsAC = () => {
-    return {
-        type: 'CHANGE-SHOW-FRIENDS'
-    } as const
-}
-
+export type ActionsType =
+    ReturnType<typeof addPostAC>
+    | ReturnType<typeof changePostAC>
+    | ReturnType<typeof addMessageAC>
+    | ReturnType<typeof changeMessageAC>
+    | ReturnType<typeof changeShowFriendsAC>
 
 export const store: StoreType = {
     _state: {
@@ -109,7 +88,8 @@ export const store: StoreType = {
             showFriends: true,
         }
     },
-    _rerenderTree() {},
+    _rerenderTree() {
+    },
     subscriber(observer: () => void) {
         this._rerenderTree = observer
     },
@@ -117,27 +97,14 @@ export const store: StoreType = {
         return this._state
     },
     dispatch(action) {
-        if (action.type === 'ADD-NEW-POST') {
-            this._state.profilePage.posts.push({id: 5, message: this._state.profilePage.newPost, likes: 0})
-            this._state.profilePage.newPost = ''
-            this._rerenderTree()
-        } else if (action.type === 'CHANGE-NEW-POST') {
-            this._state.profilePage.newPost = action.postText
-            this._rerenderTree()
-        } else if (action.type === 'ADD-NEW-MESSAGE') {
-            this._state.dialogPage.messages.push({id: 4, message: this._state.dialogPage.newMessage})
-            this._state.dialogPage.newMessage = ''
-            this._rerenderTree()
-        } else if (action.type === 'CHANGE-NEW-MESSAGE') {
-            this._state.dialogPage.newMessage = action.messageText
-            this._rerenderTree()
-        } else if (action.type === 'CHANGE-SHOW-FRIENDS') {
-            this._state.sidebar.showFriends = !this._state.sidebar.showFriends
-            this._rerenderTree()
-        }
+
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogPage = dialogReducer(this._state.dialogPage, action)
+        this._state.sidebar = sidebarReducer(this._state.sidebar, action)
+
+        this._rerenderTree()
     }
 }
-
 
 
 

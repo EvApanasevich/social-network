@@ -1,9 +1,10 @@
 import s from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {ActionsType, addMessageAC, changeMessageAC, DialogPageType} from "../../redux/Store";
+import {ActionsType, DialogPageType} from "../../redux/Store";
 import React from "react";
 import {AddTextareaForm} from "../../textarea-forms/AddTextareaForm";
+import {addMessageAC, changeMessageAC} from "../../redux/dialogPageReducer";
 
 type PropsType = {
     dialogPage: DialogPageType

@@ -1,9 +1,10 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
 import s from "./Navbar.module.css"
-import {ActionsType, changeShowFriendsAC, SidebarType} from "../../redux/Store";
+import {ActionsType, SidebarType} from "../../redux/Store";
 import {User} from "../User/User";
 import {ButtonOn} from "../../buttons/ButtonOn";
+import {changeShowFriendsAC} from "../../redux/sidebarReducer";
 
 
 type PropsType = {
