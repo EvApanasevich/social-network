@@ -30,7 +30,6 @@ export const App: React.FC<PropsType> = (props) => {
                                                                   dispatch={store.dispatch.bind(store)}/>}/>
                     <Route path='/profile' render={() => <Profile profilePage={state.profilePage}
                                                                   dispatch={store.dispatch.bind(store)}/>}/>
-
                     <Route path='/music' render={() => <Music/>}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/settings' render={() => <Settings/>}/>
