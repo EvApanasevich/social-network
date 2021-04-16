@@ -9,7 +9,7 @@ type PropsType = {
     dispatch: (action: ActionsType) => void
 }
 
-export const Profile: React.FC<PropsType> = (props) => {
+export const Profile:React.FC<PropsType> = (props) => {
     const {profilePage, dispatch} = props
 
     return (
@@ -18,7 +18,6 @@ export const Profile: React.FC<PropsType> = (props) => {
             <MyPosts posts={profilePage.posts}
                      newPost={profilePage.newPost}
                      dispatch={dispatch}/>
-
         </div>
     )
 }
