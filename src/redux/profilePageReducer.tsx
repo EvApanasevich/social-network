@@ -3,6 +3,16 @@ import {ActionsType} from "./Store";
 const ADD_NEW_POST = 'ADD-NEW-POST'
 const CHANGE_NEW_POST = 'CHANGE-NEW-POST'
 
+export type ProfilePageType = {
+    posts: Array<PostType>
+    newPost: string
+}
+export type PostType = {
+    id: number
+    message: string
+    likes: number
+}
+
 let initialState = {
     posts: [
         {id: 1, message: 'Hi, my friends!', likes: 10},

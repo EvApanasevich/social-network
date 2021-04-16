@@ -3,6 +3,20 @@ import {ActionsType} from "./Store";
 const ADD_NEW_MESSAGE = 'ADD-NEW-MESSAGE'
 const CHANGE_NEW_MESSAGE = 'CHANGE-NEW-MESSAGE'
 
+export type DialogPageType = {
+    dialogs: Array<DialogType>
+    messages: Array<MessageType>
+    newMessage: string
+}
+export type DialogType = {
+    id: number
+    name: string
+}
+export type MessageType = {
+    id: number
+    message: string
+}
+
 let initialState = {
     dialogs: [
         {id: 1, name: 'Alena'},

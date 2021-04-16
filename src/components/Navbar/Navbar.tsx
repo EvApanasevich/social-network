@@ -1,23 +1,18 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
 import s from "./Navbar.module.css"
-import {ActionsType, SidebarType} from "../../redux/Store";
 import {User} from "../User/User";
 import {ButtonOn} from "../../buttons/ButtonOn";
-import {changeShowFriendsAC} from "../../redux/sidebarReducer";
-
+import {SidebarType} from "../../redux/sidebarReducer";
 
 type PropsType = {
+    show: () => void
     sidebar: SidebarType
-    dispatch: (action: ActionsType) => void
 }
 
 export const Navbar: React.FC<PropsType> = (props) => {
-    const {sidebar, dispatch} = props
+    const {show, sidebar} = props
 
-    const show = () => {
-        dispatch(changeShowFriendsAC())
-    }
     const friends = sidebar.friends.map((u) => <User id={u.id} name={u.name}/>)
 
     return (

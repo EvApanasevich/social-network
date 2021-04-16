@@ -1,6 +1,11 @@
-import {ActionsType, SidebarType} from "./Store";
+import {ActionsType, FriendsType} from "./Store";
 
 const CHANGE_SHOW_FRIENDS = 'CHANGE-SHOW-FRIENDS'
+
+export type SidebarType = {
+    friends: Array<FriendsType>
+    showFriends: boolean
+}
 
 let initialState = {
     friends: [
