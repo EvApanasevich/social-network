@@ -1,49 +1,67 @@
-import {ActionsType} from "./Store";
+import {v1} from "uuid";
 
 const ADD_NEW_POST = 'ADD-NEW-POST'
 const CHANGE_NEW_POST = 'CHANGE-NEW-POST'
+
+type ActionsType = AddPost | ChangePost
+
+type AddPost = {
+    type: 'ADD-NEW-POST'
+}
+type ChangePost = {
+    type: "CHANGE-NEW-POST",
+    postText: string
+}
 
 export type ProfilePageType = {
     posts: Array<PostType>
     newPost: string
 }
-export type PostType = {
-    id: number
+type PostType = {
+    id: string
     message: string
     likes: number
 }
 
-let initialState = {
+let initialState: ProfilePageType = {
     posts: [
-        {id: 1, message: 'Hi, my friends!', likes: 10},
-        {id: 2, message: 'yo, yo', likes: 5},
-        {id: 3, message: 'ya-hu-how!', likes: 7}
+        {id: v1(), message: 'Hi, my friends!', likes: 10},
+        {id: v1(), message: 'yo, yo', likes: 5},
+        {id: v1(), message: 'ya-hu-how!', likes: 7}
     ],
     newPost: ''
 }
 
-export const profileReducer = (state = initialState, action: ActionsType) => {
+export const profileReducer = (state: ProfilePageType = initialState, action: ActionsType): ProfilePageType => {
     switch (action.type) {
         case ADD_NEW_POST:
-            state.posts.push({id: 5, message: state.newPost, likes: 0})
-            state.newPost = ''
-            return state
+            let newPost = {
+                id: v1(),
+                message: state.newPost,
+                likes: 0
+            }
+            return {
+                ...state,
+                posts: [...state.posts, newPost]
+            }
         case CHANGE_NEW_POST:
-            state.newPost = action.postText
-            return state
+            return {
+                ...state,
+                newPost: action.postText
+            }
         default:
             return state
     }
 }
 
-export const addPostAC = () => {
+export const addPostAC = (): AddPost => {
     return {
-        type: 'ADD-NEW-POST'
-    } as const
+        type: ADD_NEW_POST
+    }
 }
-export const changePostAC = (postText: string) => {
+export const changePostAC = (postText: string): ChangePost => {
     return {
-        type: "CHANGE-NEW-POST",
+        type: CHANGE_NEW_POST,
         postText: postText
-    } as const
+    }
 }

@@ -4,11 +4,14 @@ import ava from '../../../images/Avaimg.jpg'
 
 type PropsType = {
     name: string
-    id: number
+    id: string
 }
 
 export const DialogItem: React.FC<PropsType> = (props) => {
-    const {name, id} = props
+    const {
+        name,
+        id
+    } = props
 
     const path = '/dialogs/' + id
 

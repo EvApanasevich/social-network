@@ -7,7 +7,10 @@ type ButtonPropsType = {
 }
 
 export const ButtonOn: React.FC<ButtonPropsType> = (props) => {
-    const {onClickHandler, buttonName} = props
+    const {
+        onClickHandler,
+        buttonName
+    } = props
 
     const [style, setStyle] = useState<boolean>(false)
     const setClass = (event: MouseEvent<HTMLButtonElement>) => {

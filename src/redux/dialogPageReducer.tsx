@@ -1,7 +1,17 @@
-import {ActionsType} from "./Store";
+import {v1} from "uuid";
 
 const ADD_NEW_MESSAGE = 'ADD-NEW-MESSAGE'
 const CHANGE_NEW_MESSAGE = 'CHANGE-NEW-MESSAGE'
+
+export type DialogPageActionsType = AddMessageActionType | ChangeMessageActionType
+
+type AddMessageActionType = {
+    type: "ADD-NEW-MESSAGE"
+}
+type ChangeMessageActionType = {
+    type: 'CHANGE-NEW-MESSAGE',
+    messageText: string
+}
 
 export type DialogPageType = {
     dialogs: Array<DialogType>
@@ -9,50 +19,57 @@ export type DialogPageType = {
     newMessage: string
 }
 export type DialogType = {
-    id: number
+    id: string
     name: string
 }
 export type MessageType = {
-    id: number
+    id: string
     message: string
 }
 
-let initialState = {
+let initialState: DialogPageType = {
     dialogs: [
-        {id: 1, name: 'Alena'},
-        {id: 2, name: 'Dima'},
-        {id: 3, name: 'Pavel'}
+        {id: v1(), name: 'Alena'},
+        {id: v1(), name: 'Dima'},
+        {id: v1(), name: 'Pavel'}
     ],
     messages: [
-        {id: 1, message: 'hello!'},
-        {id: 2, message: 'How are you?'},
-        {id: 3, message: 'Good!'}
+        {id: v1(), message: 'hello!'},
+        {id: v1(), message: 'How are you?'},
+        {id: v1(), message: 'Good!'}
     ],
     newMessage: ''
 }
 
-export const dialogReducer = (state = initialState, action: ActionsType) => {
+export const dialogReducer = (state: DialogPageType = initialState, action: DialogPageActionsType): DialogPageType => {
     switch (action.type) {
         case ADD_NEW_MESSAGE:
-            state.messages.push({id: 4, message: state.newMessage})
-            state.newMessage = ''
-            return state
+            let newMessage = {
+                id: v1(),
+                message: state.newMessage
+            }
+            return {
+                ...state,
+                messages: [...state.messages, newMessage]
+            }
         case CHANGE_NEW_MESSAGE:
-            state.newMessage = action.messageText
-            return state
+            return {
+                ...state,
+                newMessage: action.messageText
+            }
         default:
             return state
     }
 }
 
-export const addMessageAC = () => {
+export const addMessageAC = (): AddMessageActionType => {
     return {
-        type: "ADD-NEW-MESSAGE"
-    } as const
+        type: ADD_NEW_MESSAGE
+    }
 }
-export const changeMessageAC = (messageText: string) => {
+export const changeMessageAC = (messageText: string): ChangeMessageActionType => {
     return {
-        type: 'CHANGE-NEW-MESSAGE',
+        type: CHANGE_NEW_MESSAGE,
         messageText: messageText
-    } as const
+    }
 }

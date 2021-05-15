@@ -1,34 +1,45 @@
-import {ActionsType, FriendsType} from "./Store";
+import {v1} from "uuid";
 
 const CHANGE_SHOW_FRIENDS = 'CHANGE-SHOW-FRIENDS'
 
+type ActionsType = ChangeShowFriends
+
+type ChangeShowFriends = {
+    type: 'CHANGE-SHOW-FRIENDS'
+}
 export type SidebarType = {
     friends: Array<FriendsType>
     showFriends: boolean
 }
+type FriendsType = {
+    id: string
+    name: string
+}
 
-let initialState = {
+const initialState: SidebarType = {
     friends: [
-        {id: 1, name: 'Alena'},
-        {id: 2, name: 'Dima'},
-        {id: 3, name: 'Kolya'},
-        {id: 4, name: 'Usik'}
+        {id: v1(), name: 'Alena'},
+        {id: v1(), name: 'Dima'},
+        {id: v1(), name: 'Kolya'},
+        {id: v1(), name: 'Usik'}
     ],
     showFriends: true
 }
 
-export const sidebarReducer = (state = initialState, action: ActionsType) => {
+export const sidebarReducer = (state: SidebarType = initialState, action: ActionsType): SidebarType => {
     switch (action.type) {
         case CHANGE_SHOW_FRIENDS:
-            state.showFriends = !state.showFriends
-           return state
+            return {
+                ...state,
+                showFriends: !state.showFriends
+            }
         default:
             return state
     }
 }
 
-export const changeShowFriendsAC = () => {
+export const changeShowFriendsAC = (): ChangeShowFriends => {
     return {
-        type: 'CHANGE-SHOW-FRIENDS'
-    } as const
+        type: CHANGE_SHOW_FRIENDS
+    }
 }

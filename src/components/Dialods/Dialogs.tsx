@@ -3,16 +3,14 @@ import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import React from "react";
 import {AddTextareaForm} from "../../textarea-forms/AddTextareaForm";
-import { DialogPageType } from '../../redux/dialogPageReducer';
+import {DialogsPropsType} from "./DialogsContainer";
 
-type PropsType = {
-    addMessage: () => void
-    changeMessage: (inputText: string) => void
-    dialogPage: DialogPageType
-}
-
-export const Dialogs: React.FC<PropsType> = (props) => {
-    const {addMessage, changeMessage, dialogPage} = props
+export const Dialogs: React.FC<DialogsPropsType> = (props) => {
+    const {
+        addMessage,
+        changeMessage,
+        dialogPage
+    } = props
 
     const dialogsItem = dialogPage.dialogs.map((d) => <DialogItem name={d.name} id={d.id}/>)
     const messageElement = dialogPage.messages.map((m) => <Message message={m.message} id={m.id}/>)
