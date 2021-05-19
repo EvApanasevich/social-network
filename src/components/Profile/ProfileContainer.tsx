@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../redux/Redux-store";
 import {addPost, changePost, PostType, setUserProfile, UserProfileType} from "../../redux/profilePageReducer";
@@ -8,6 +7,7 @@ import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {MyPosts} from "./MyPosts/MyPosts";
 import {RouteComponentProps, withRouter } from "react-router-dom";
 import {toggleLoading} from "../../redux/usersReducer";
+import {profileApi} from "../../api/api";
 
 type MapStatePropsType = {
     posts: Array<PostType>
@@ -34,13 +34,13 @@ export class ProfileApiContainer extends React.Component<PropsType> {
 
     componentDidMount(): void {
 
-        const userId = this.props.match.params.userId      //  <====   get the id from the browser line
+        const userId = this.props.match.params.userId    //<==== get the id from the browser line using (withRouter)
 
         this.props.toggleLoading(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + (!userId ? 2 : userId))  // check for userId
-            .then(respons => {
+        profileApi.getProfile (userId)
+            .then(data => {
                 this.props.toggleLoading(false)
-                this.props.setUserProfile(respons.data)
+                this.props.setUserProfile(data)
             })
     }
 

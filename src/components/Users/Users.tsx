@@ -9,8 +9,8 @@ type PropsType = {
     count: number
     currentPage: number
     loading: boolean
-    follow: (userId: string) => void
-    unfollow: (userId: string) => void
+    follow: (userId: number) => void
+    unfollow: (userId: number) => void
     pageChange: (currentPage: number) => void
 }
 

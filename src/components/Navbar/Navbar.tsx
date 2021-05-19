@@ -2,7 +2,7 @@ import React from "react";
 import {NavLink} from "react-router-dom";
 import s from "./Navbar.module.css"
 import {User} from "../User/User";
-import {ButtonOn} from "../../buttons/ButtonOn";
+import {ButtonOn} from "../common/buttons/ButtonOn";
 import {NavbarPropsType} from "./NavbarContainer";
 
 export const Navbar: React.FC<NavbarPropsType> = (props) => {

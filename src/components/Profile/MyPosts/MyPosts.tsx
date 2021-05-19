@@ -1,7 +1,7 @@
 import s from "./MyPosts.module.css";
 import React from "react";
 import {Post} from "./Post/Post";
-import {AddTextareaForm} from "../../../textarea-forms/AddTextareaForm";
+import {AddTextareaForm} from "../../common/textarea-forms/AddTextareaForm";
 import {PostType} from "../../../redux/profilePageReducer";
 
 type PropsType = {

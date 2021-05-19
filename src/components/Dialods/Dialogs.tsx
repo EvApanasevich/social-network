@@ -2,7 +2,7 @@ import s from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import React from "react";
-import {AddTextareaForm} from "../../textarea-forms/AddTextareaForm";
+import {AddTextareaForm} from "../common/textarea-forms/AddTextareaForm";
 import {DialogsPropsType} from "./DialogsContainer";
 
 export const Dialogs: React.FC<DialogsPropsType> = (props) => {

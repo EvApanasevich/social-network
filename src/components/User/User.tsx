@@ -1,13 +1,13 @@
 import s from './User.module.css'
 import React from "react";
 import {UserType} from "../../redux/usersReducer";
-import {ButtonOn} from "../../buttons/ButtonOn";
+import {ButtonOn} from "../common/buttons/ButtonOn";
 import {NavLink} from "react-router-dom";
 
 type PropsType = {
     user: UserType
-    follow: (userId: string) => void
-    unfollow: (userId: string) => void
+    follow: (userId: number) => void
+    unfollow: (userId: number) => void
 }
 
 export const User: React.FC<PropsType> = (props) => {
@@ -41,12 +41,6 @@ export const User: React.FC<PropsType> = (props) => {
             </div>
             <div>
                 {user.status}
-            </div>
-            <div>
-                {'user.location.country'}
-            </div>
-            <div>
-                {'user.location.sity'}
             </div>
         </div>
     )

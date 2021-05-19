@@ -1,6 +1,6 @@
 import s from './DialogItem.module.css'
 import {NavLink} from "react-router-dom";
-import ava from '../../../images/Avaimg.jpg'
+import ava from '../../../assets/images/Avaimg.jpg'
 
 type PropsType = {
     name: string

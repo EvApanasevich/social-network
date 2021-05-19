@@ -1,5 +1,5 @@
 import React from "react";
-import ava from "../../../../images/Avaimg.jpg"
+import ava from "../../../../assets/images/Avaimg.jpg"
 import s from "./Post.module.css"
 
 type PropsType = {

@@ -12,7 +12,8 @@ import {AppRootStateType} from "../../redux/Redux-store";
 import React from "react";
 import axios from "axios";
 import {Users} from "./Users";
-import {Preloader} from "../common/Preloader";
+import {Preloader} from "../common/preloader/Preloader";
+import {usersApi} from "../../api/api";
 
 type UsersPropsType = MapStatePropsType & MapDispatchPropsType
 
@@ -24,8 +25,8 @@ type MapStatePropsType = {
     loading: boolean
 }
 type MapDispatchPropsType = {
-    follow: (userId: string) => void
-    unfollow: (userId: string) => void
+    follow: (userId: number) => void
+    unfollow: (userId: number) => void
     setUsers: (users: Array<UserType>) => void
     setCurrentPage: (currentPage: number) => void
     setTotalCount: (totalCount: number) => void
@@ -41,37 +42,52 @@ class UsersApiContainer extends React.Component<UsersPropsType> {
 
     componentDidMount(): void {
         this.props.toggleLoading(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.count}`)
-            .then(respons => {
+        usersApi.getUsers(this.props.currentPage, this.props.count)
+            .then(data => {
                 this.props.toggleLoading(false)
-                this.props.setUsers(respons.data.items)
-                this.props.setTotalCount(respons.data.totalCount)
+                this.props.setUsers(data.items)
+                this.props.setTotalCount(data.totalCount)
             })
     }
-
     pageChange = (currentPage: number) => {
         this.props.setCurrentPage(currentPage)
         this.props.toggleLoading(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${this.props.count}`)
-            .then(respons => {
+        usersApi.getUsers(currentPage, this.props.count)
+            .then(data => {
                 this.props.toggleLoading(false)
-                this.props.setUsers(respons.data.items)
+                this.props.setUsers(data.items)
+            })
+    }
+    follow = (userId: number) => {
+        usersApi.follow(userId)
+            .then(resultCode => {
+                if (resultCode === 0) {
+                    this.props.follow(userId)
+                }
+            })
+    }
+    unfollow = (userId: number) => {
+        usersApi.unfollow(userId)
+            .then(resultCode => {
+                if (resultCode === 0) {
+                    this.props.unfollow(userId)
+                }
             })
     }
 
     render() {
         return (<>
-                {this.props.loading ? <Preloader /> : null}
+                {this.props.loading ? <Preloader/> : null}
                 <Users
                     users={this.props.users}
                     totalCount={this.props.totalCount}
                     count={this.props.count}
                     currentPage={this.props.currentPage}
                     loading={this.props.loading}
-                    follow={this.props.follow}
-                    unfollow={this.props.unfollow}
+                    follow={this.follow}
+                    unfollow={this.unfollow}
                     pageChange={this.pageChange}/>
-                </>
+            </>
         )
     }
 }
@@ -87,28 +103,6 @@ const mapStateToProps = (state: AppRootStateType): MapStatePropsType => {
         loading: state.usersPage.loading
     }
 }
-/*const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
-    return {
-        follow: (userId: string) => {
-            dispatch(followAC(userId))
-        },
-        unfollow: (userId: string) => {
-            dispatch(unfollowAC(userId))
-        },
-        setUsers: (users: Array<UserType>) => {
-            dispatch(setUsersAC(users))
-        },
-        setCurrentPage: (currentPage: number) => {
-            dispatch(setCurrentPageAC(currentPage))
-        },
-        setTotalCount: (totalCount: number) => {
-            dispatch(setTotalCountAC(totalCount))
-        },
-        toggleLoading: (loading: boolean) => {
-            dispatch(toggleLoadingAC(loading))
-        }
-    }
-}*/
 
 export const UsersContainer = connect(mapStateToProps,
-    {follow, unfollow, setUsers, setCurrentPage, setTotalCount, toggleLoading}) (UsersApiContainer)
+    {follow, unfollow, setUsers, setCurrentPage, setTotalCount, toggleLoading})(UsersApiContainer)
