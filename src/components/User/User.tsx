@@ -2,51 +2,52 @@ import s from './User.module.css'
 import React from "react";
 import {UserType} from "../../redux/usersReducer";
 import {ButtonOn} from "../../buttons/ButtonOn";
+import {NavLink} from "react-router-dom";
 
 type PropsType = {
     user: UserType
-    startFollowing: (userId: string) => void
-    stopFollowing: (userId: string) => void
+    follow: (userId: string) => void
+    unfollow: (userId: string) => void
 }
 
 export const User: React.FC<PropsType> = (props) => {
     const {
         user,
-        startFollowing,
-        stopFollowing
+        follow,
+        unfollow
     } = props
 
-    const startFollowingHandler = () => {
-        startFollowing(user.id)
+    const startFollowing = () => {
+        follow(user.id)
     }
-    const stopFollowingHandler = () => {
-        stopFollowing(user.id)
+    const stopFollowing = () => {
+        unfollow(user.id)
     }
 
     return (
         <div className={s.user}>
             <div>
-                <img src={user.photo}/>
+                <NavLink to={'/profile/' + user.id}>
+                    <img src={user.photos.small}/>
+                </NavLink>
             </div>
             <div>
                 <ButtonOn
-                    onClickHandler={user.followed ? stopFollowingHandler : startFollowingHandler}
+                    onClickHandler={user.followed ? stopFollowing : startFollowing}
                     buttonName={user.followed ? 'unfollow' : 'follow'}/>
             </div>
             <div>
-                {user.fullName}
+                {user.name}
             </div>
             <div>
                 {user.status}
             </div>
-            <span>
             <div>
-                {user.location.country}
+                {'user.location.country'}
             </div>
             <div>
-                {user.location.sity}
+                {'user.location.sity'}
             </div>
-                </span>
         </div>
     )
 }

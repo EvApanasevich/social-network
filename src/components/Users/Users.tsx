@@ -1,32 +1,45 @@
 import React from 'react'
-import {UsersPropsType} from "./UsersContainer";
+import s from "./Users.module.css";
+import {UserType} from "../../redux/usersReducer";
 import {User} from "../User/User";
 
-export const Users = (props: UsersPropsType) => {
-    const {
-        usersPage,
-        follow,
-        unfollow,
-        setUsers
-    } = props
+type PropsType = {
+    users: Array<UserType>
+    totalCount: number
+    count: number
+    currentPage: number
+    loading: boolean
+    follow: (userId: string) => void
+    unfollow: (userId: string) => void
+    pageChange: (currentPage: number) => void
+}
 
-    const startFollowing = (userId: string) => {
-        follow(userId)
-    }
-    const stopFollowing = (userId: string) => {
-        unfollow(userId)
-    }
-    const usersList = usersPage.users.map(u => <User
-            key={u.id}
-            user={u}
-            startFollowing={startFollowing}
-            stopFollowing={stopFollowing}
-        />
-    )
+export const Users = (props: PropsType) => {
 
-    return (
+    const pagesCount = Math.ceil(props.totalCount / props.count)
+    const numbersOfPages = []
+
+    for (let i = 1; i <= pagesCount; i++) {
+        numbersOfPages.push(i)
+    }
+
+    return <div className={s.users_page}>
         <div>
-            {usersList}
+            {numbersOfPages.map(p => {
+                return <span key={p}
+                             onClick={() => props.pageChange(p)}
+                             className={props.currentPage === p ? s.selectedPage : ''}>{p}
+                        </span>
+            })}
         </div>
-    )
+        <div>
+            { !props.loading ? props.users.map((u: UserType) => <User
+                    key={u.id}
+                    user={u}
+                    follow={props.follow}
+                    unfollow={props.unfollow}
+                />
+            ) : null}
+        </div>
+    </div>
 }

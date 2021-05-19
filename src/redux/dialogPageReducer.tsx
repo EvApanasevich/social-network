@@ -46,11 +46,12 @@ export const dialogReducer = (state: DialogPageType = initialState, action: Dial
         case ADD_NEW_MESSAGE:
             let newMessage = {
                 id: v1(),
-                message: state.newMessage
+                message: state.newMessage,
             }
             return {
                 ...state,
-                messages: [...state.messages, newMessage]
+                messages: [...state.messages, newMessage],
+                newMessage: ''
             }
         case CHANGE_NEW_MESSAGE:
             return {
@@ -62,12 +63,12 @@ export const dialogReducer = (state: DialogPageType = initialState, action: Dial
     }
 }
 
-export const addMessageAC = (): AddMessageActionType => {
+export const addMessage = (): AddMessageActionType => {
     return {
         type: ADD_NEW_MESSAGE
     }
 }
-export const changeMessageAC = (messageText: string): ChangeMessageActionType => {
+export const changeMessage = (messageText: string): ChangeMessageActionType => {
     return {
         type: CHANGE_NEW_MESSAGE,
         messageText: messageText

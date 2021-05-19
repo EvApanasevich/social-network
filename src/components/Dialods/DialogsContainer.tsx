@@ -1,8 +1,7 @@
-import {addMessageAC, changeMessageAC, DialogPageType} from "../../redux/dialogPageReducer";
+import {addMessage, changeMessage, DialogPageType} from "../../redux/dialogPageReducer";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../redux/Redux-store";
-import {Dispatch} from "redux"
 
 export type DialogsPropsType = MapStatePropsType & MapDispatchPropsType
 
@@ -19,15 +18,5 @@ const mapStateToProps = (state: AppRootStateType): MapStatePropsType => {
         dialogPage: state.dialogPage
     }
 }
-const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
-    return {
-        addMessage: () => {
-            dispatch(addMessageAC())
-        },
-        changeMessage: (inputText: string) => {
-            dispatch(changeMessageAC(inputText))
-        },
-    }
-}
 
-export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps) (Dialogs)
+export const DialogsContainer = connect(mapStateToProps, {addMessage, changeMessage}) (Dialogs)
