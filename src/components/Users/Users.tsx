@@ -9,9 +9,10 @@ type PropsType = {
     count: number
     currentPage: number
     loading: boolean
+    followingProgress: Array<number>
     follow: (userId: number) => void
     unfollow: (userId: number) => void
-    pageChange: (currentPage: number) => void
+    getUsers: (currentPage: number, current: number) => void
 }
 
 export const Users = (props: PropsType) => {
@@ -27,17 +28,18 @@ export const Users = (props: PropsType) => {
         <div>
             {numbersOfPages.map(p => {
                 return <span key={p}
-                             onClick={() => props.pageChange(p)}
-                             className={props.currentPage === p ? s.selectedPage : ''}>{p}
-                        </span>
+                             onClick={() => props.getUsers(p, props.count)}
+                             className={props.currentPage === p ? s.selectedPage : ''}>
+                    {p} </span>
             })}
         </div>
         <div>
-            { !props.loading ? props.users.map((u: UserType) => <User
+            {!props.loading ? props.users.map((u: UserType) => <User
                     key={u.id}
                     user={u}
                     follow={props.follow}
                     unfollow={props.unfollow}
+                    followingProgress={props.followingProgress}
                 />
             ) : null}
         </div>

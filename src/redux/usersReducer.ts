@@ -1,12 +1,16 @@
+import {usersApi} from "../api/api";
+import {Dispatch} from "redux";
+
 const UNFOLLOW = 'UNFOLLOW'
 const FOLLOW = 'FOLLOW'
 const SET_USERS = 'SET_USERS'
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT'
 const TOGGLE_LOADING = 'TOGGLE_LOADING'
+const TOGGLE_FOLLOWING_PROGRESS = 'TOGGLE_FOLLOWING_PROGRESS'
 
 type UsersActionsType = UnfollowActionType | FollowActionType | SetUsersActionType | SetCurrentPageActionType |
-                        SetTotalCountActionType | ToggleLoadingActionType
+    SetTotalCountActionType | ToggleLoadingActionType | ToggleFollowingProgressActionType
 
 type UnfollowActionType = {
     type: 'UNFOLLOW',
@@ -32,6 +36,11 @@ type ToggleLoadingActionType = {
     type: 'TOGGLE_LOADING'
     loading: boolean
 }
+type ToggleFollowingProgressActionType = {
+    type: 'TOGGLE_FOLLOWING_PROGRESS'
+    isLoading: boolean
+    userId: number
+}
 
 export type UsersPageType = {
     users: Array<UserType>
@@ -39,6 +48,7 @@ export type UsersPageType = {
     totalCount: number
     currentPage: number
     loading: boolean
+    followingProgress: Array<number>
 }
 export type UserType = {
     name: string
@@ -58,7 +68,8 @@ const initialState: UsersPageType = {
     count: 50,
     totalCount: 0,
     currentPage: 1,
-    loading: false
+    loading: false,
+    followingProgress: []
 }
 
 export const usersReducer = (state: UsersPageType = initialState, action: UsersActionsType): UsersPageType => {
@@ -103,18 +114,25 @@ export const usersReducer = (state: UsersPageType = initialState, action: UsersA
                 ...state,
                 loading: action.loading
             }
+        case TOGGLE_FOLLOWING_PROGRESS:
+            return {
+                ...state,
+                followingProgress: action.isLoading
+                    ? [...state.followingProgress, action.userId]
+                    : state.followingProgress.filter(id => id !== action.userId)
+            }
         default:
             return state
     }
 }
 
-export const follow = (userId: number): FollowActionType => {
+export const successedFollow = (userId: number): FollowActionType => {
     return {
         type: FOLLOW,
         userId: userId
     }
 }
-export const unfollow = (userId: number): UnfollowActionType => {
+export const successedUnfollow = (userId: number): UnfollowActionType => {
     return {
         type: UNFOLLOW,
         userId: userId
@@ -142,5 +160,57 @@ export const toggleLoading = (loading: boolean): ToggleLoadingActionType => {
     return {
         type: TOGGLE_LOADING,
         loading: loading
+    }
+}
+export const toggleFollowingProgress = (isLoading: boolean, userId: number): ToggleFollowingProgressActionType => {
+    return {
+        type: TOGGLE_FOLLOWING_PROGRESS,
+        isLoading: isLoading,
+        userId: userId
+    }
+}
+
+//////////////////////////////////////////// Thunk ////////////////////////////////////////////////////////////////
+
+export const getUsers = (currentPage: number, count: number) => {
+
+    return (dispatch: Dispatch) => {
+
+        dispatch(setCurrentPage(currentPage))
+        dispatch(toggleLoading(true))
+        usersApi.getUsers(currentPage, count)
+            .then(data => {
+                dispatch(toggleLoading(false))
+                dispatch(setUsers(data.items))
+                dispatch(setTotalCount(data.totalCount))
+            })
+    }
+}
+export const follow = (userId: number) => {
+
+    return (dispatch: Dispatch) => {
+
+        dispatch(toggleFollowingProgress(true, userId))
+        usersApi.follow(userId)
+            .then(resultCode => {
+                if (resultCode === 0) {
+                    dispatch(successedFollow(userId))
+                }
+                dispatch(toggleFollowingProgress(false, userId))
+            })
+    }
+}
+export const unfollow = (userId: number) => {
+
+    return (dispatch: Dispatch) => {
+
+        dispatch(toggleFollowingProgress(true, userId))
+        usersApi.unfollow(userId)
+            .then(resultCode => {
+                if (resultCode === 0) {
+                    dispatch(successedUnfollow(userId))
+                }
+                dispatch(toggleFollowingProgress(false, userId))
+            })
     }
 }

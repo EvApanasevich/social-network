@@ -1,4 +1,7 @@
 import {v1} from "uuid";
+import {profileApi} from "../api/api";
+import {Dispatch} from "redux";
+import {toggleLoading} from "./usersReducer";
 
 const ADD_NEW_POST = 'ADD-NEW-POST'
 const CHANGE_NEW_POST = 'CHANGE-NEW-POST'
@@ -104,5 +107,17 @@ export const setUserProfile = (userProfile: UserProfileType): SetUserProfileActi
     return {
         type: SET_USER_PROFILE,
         userProfile: userProfile
+    }
+}
+
+export const getProfile = (userId: string | undefined) => {
+
+    return (dispatch: Dispatch) => {
+        dispatch(toggleLoading(true))
+        profileApi.getProfile (userId)
+            .then(data => {
+                dispatch(toggleLoading(false))
+                dispatch(setUserProfile(data))
+            })
     }
 }

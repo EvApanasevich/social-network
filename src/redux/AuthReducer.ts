@@ -1,3 +1,6 @@
+import {Dispatch} from "redux";
+import {authApi} from "../api/api";
+
 const SET_AUTH_DATA = 'SET_AUTH_DATA'
 
 type AuthActionType = SetAuthActionType
@@ -37,5 +40,17 @@ export const setAuthData = (id: number, email: string, login: string): SetAuthAc
     return {
         type: SET_AUTH_DATA,
         data: {id, email, login}
+    }
+}
+
+export const getAuthMe = () => {
+
+    return (dispatch: Dispatch) => {
+        authApi.getAuthMe()
+            .then(data => {
+                    const {id, email, login} = data
+                    dispatch(setAuthData(id, email, login))
+                }
+            )
     }
 }

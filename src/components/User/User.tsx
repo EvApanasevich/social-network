@@ -3,18 +3,21 @@ import React from "react";
 import {UserType} from "../../redux/usersReducer";
 import {ButtonOn} from "../common/buttons/ButtonOn";
 import {NavLink} from "react-router-dom";
+import {DisabledButton} from "../common/buttons/ButtonDisabled";
 
 type PropsType = {
     user: UserType
     follow: (userId: number) => void
     unfollow: (userId: number) => void
+    followingProgress: Array<number>
 }
 
 export const User: React.FC<PropsType> = (props) => {
     const {
         user,
         follow,
-        unfollow
+        unfollow,
+        followingProgress
     } = props
 
     const startFollowing = () => {
@@ -32,9 +35,15 @@ export const User: React.FC<PropsType> = (props) => {
                 </NavLink>
             </div>
             <div>
-                <ButtonOn
-                    onClickHandler={user.followed ? stopFollowing : startFollowing}
-                    buttonName={user.followed ? 'unfollow' : 'follow'}/>
+                {followingProgress.some(id => id === user.id) ?
+                    <DisabledButton
+                        buttonName={user.followed ? 'unfollow' : 'follow'}
+                    /> :
+                    <ButtonOn
+                        onClickHandler={user.followed ? stopFollowing : startFollowing}
+                        buttonName={user.followed ? 'unfollow' : 'follow'}
+                    />
+                }
             </div>
             <div>
                 {user.name}

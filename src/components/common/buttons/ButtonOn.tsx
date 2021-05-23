@@ -9,7 +9,7 @@ type ButtonPropsType = {
 export const ButtonOn: React.FC<ButtonPropsType> = (props) => {
     const {
         onClickHandler,
-        buttonName
+        buttonName,
     } = props
 
     const [style, setStyle] = useState<boolean>(false)
@@ -21,10 +21,15 @@ export const ButtonOn: React.FC<ButtonPropsType> = (props) => {
     }
 
     return (
-            <button onMouseEnter={setClass}
-                    onMouseLeave={delClass}
-                    className={style ? s.active : s.button}
-                    onClick={onClickHandler}>{buttonName}
+        <div>
+            <button
+                onMouseEnter={setClass}
+                onMouseLeave={delClass}
+                className={style ? s.active : s.button}
+                onClick={onClickHandler}
+            >
+                {buttonName}
             </button>
+        </div>
     )
 }

@@ -1,13 +1,11 @@
 import React from "react";
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../redux/Redux-store";
-import {addPost, changePost, PostType, setUserProfile, UserProfileType} from "../../redux/profilePageReducer";
+import {addPost, changePost, getProfile, PostType, UserProfileType} from "../../redux/profilePageReducer";
 import s from "./Profile.module.css";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {MyPosts} from "./MyPosts/MyPosts";
 import {RouteComponentProps, withRouter } from "react-router-dom";
-import {toggleLoading} from "../../redux/usersReducer";
-import {profileApi} from "../../api/api";
 
 type MapStatePropsType = {
     posts: Array<PostType>
@@ -18,8 +16,7 @@ type MapStatePropsType = {
 type MapDispatchPropsType = {
     addPost: () => void
     changePost: (postText: string) => void
-    setUserProfile: (userProfile: UserProfileType) => void
-    toggleLoading: (loading: boolean) => void
+    getProfile: (userId: string | undefined) => void
 }
 type PathParamsType = {
     userId: string | undefined
@@ -36,12 +33,7 @@ export class ProfileApiContainer extends React.Component<PropsType> {
 
         const userId = this.props.match.params.userId    //<==== get the id from the browser line using (withRouter)
 
-        this.props.toggleLoading(true)
-        profileApi.getProfile (userId)
-            .then(data => {
-                this.props.toggleLoading(false)
-                this.props.setUserProfile(data)
-            })
+        this.props.getProfile(userId)
     }
 
     render() {
@@ -74,4 +66,4 @@ const mapStateToProps = (state: AppRootStateType): MapStatePropsType => {
 
 let WithUrlDataProfileApiContainer = withRouter(ProfileApiContainer)
 
-export const ProfileContainer = connect(mapStateToProps, {setUserProfile, addPost, changePost, toggleLoading}) (WithUrlDataProfileApiContainer)
+export const ProfileContainer = connect(mapStateToProps, {addPost, changePost, getProfile}) (WithUrlDataProfileApiContainer)
