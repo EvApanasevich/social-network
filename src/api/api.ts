@@ -4,58 +4,37 @@ const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     withCredentials: true,
     headers: {
-        'API-KEY': '52b2236a-5e9e-4ab8-8c8f-edf0cef72f57'
+        'API-KEY': 'f2303fc9-e527-4a0d-a589-c2b1964ace41'
     }
 })
 
 export const usersApi = {
     getUsers(currentPage: number, count: number) {
-        return (
-            instance.get(`users?page=${currentPage}&count=${count}`)
-                .then(response => {
-                    return response.data
-                })
-        )
+        return instance.get(`users?page=${currentPage}&count=${count}`)
     },
     follow(userId: number) {
-        return (
-            instance.post(`follow/${userId}`)
-                .then(respons => {
-                    return respons.data.resultCode
-                })
-        )
+        return instance.post(`follow/${userId}`)
     },
     unfollow(userId: number) {
-        return (
-            instance.delete(`follow/${userId}`)
-                .then(respons => {
-                    return respons.data.resultCode
-                })
-        )
+        return instance.delete(`follow/${userId}`)
     }
 }
 
 export const profileApi = {
-    getProfile(userId: string | undefined) {
-        return (
-            instance.get(`profile/` + (!userId ? 2 : userId))
-                .then(respons => {
-                    return respons.data
-                })
-        )
+    getProfile(userId: string | undefined, myId: number | null) {
+        return instance.get(`profile/` + (!userId ? myId : userId))
+    },
+    getStatus(userId: string | undefined, myId: number | null) {
+        return instance.get('profile/status/' + (!userId ? myId : userId))
+    },
+    updateStatus(status: string) {
+        return instance.put('profile/status', {status: status})
     }
 }
 
 export const authApi = {
     getAuthMe() {
-        return (
-            instance.get(`auth/me`)
-                .then(respons => {
-                    if (respons.data.resultCode === 0) {
-                        return respons.data.data
-                    }
-                })
-        )
+        return instance.get(`auth/me`)
     }
 }
 

@@ -1,0 +1,14 @@
+.formElement {
+    outline: none;
+}
+.formElement textarea {
+    outline: none;
+}
+.formElement.error input,
+.formElement.error textarea {
+    border: 1px solid crimson;
+    background-color: #fdecf1;
+}
+.formElement.error span {
+    color: #d7506b;
+}
