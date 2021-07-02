@@ -21,11 +21,11 @@ export const usersApi = {
 }
 
 export const profileApi = {
-    getProfile(userId: string | undefined, myId: number | null) {
-        return instance.get(`profile/` + (!userId ? myId : userId))
+    getProfile(userId: number) {
+        return instance.get(`profile/${userId}`)
     },
     getStatus(userId: string | undefined, myId: number | null) {
-        return instance.get('profile/status/' + (!userId ? myId : userId))
+        return instance.get(`profile/status/${!userId ? myId : userId}`)
     },
     updateStatus(status: string) {
         return instance.put('profile/status', {status: status})
@@ -33,8 +33,14 @@ export const profileApi = {
 }
 
 export const authApi = {
-    getAuthMe() {
+    authMe() {
         return instance.get(`auth/me`)
+    },
+    login(email: string, password: string, rememberMe: boolean) {
+        return instance.post('auth/login', {email, password, rememberMe})
+    },
+    logout() {
+        return instance.delete('auth/login')
     }
 }
 

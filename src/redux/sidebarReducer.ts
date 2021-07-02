@@ -2,11 +2,12 @@ import {v1} from "uuid";
 
 const CHANGE_SHOW_FRIENDS = 'CHANGE-SHOW-FRIENDS'
 
-type ActionsType = ChangeShowFriends
+export type SidebarActionsType = ChangeShowFriends
 
 type ChangeShowFriends = {
     type: 'CHANGE-SHOW-FRIENDS'
 }
+
 export type SidebarType = {
     friends: Array<FriendsType>
     showFriends: boolean
@@ -26,7 +27,7 @@ const initialState: SidebarType = {
     showFriends: true
 }
 
-export const sidebarReducer = (state: SidebarType = initialState, action: ActionsType): SidebarType => {
+export const sidebarReducer = (state: SidebarType = initialState, action: SidebarActionsType): SidebarType => {
     switch (action.type) {
         case CHANGE_SHOW_FRIENDS:
             return {

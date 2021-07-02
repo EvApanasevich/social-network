@@ -4,6 +4,9 @@
 .formElement textarea {
     outline: none;
 }
+.formElement input {
+    outline: none;
+}
 .formElement.error input,
 .formElement.error textarea {
     border: 1px solid crimson;

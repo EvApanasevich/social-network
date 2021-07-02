@@ -1,18 +1,19 @@
 import {v1} from "uuid";
 import {profileApi} from "../api/api";
-import {Dispatch} from "redux";
 import {toggleLoading} from "./usersReducer";
+import {AppThunkType} from "./Redux-store";
 
 const ADD_NEW_POST = 'ADD-NEW-POST'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_STATUS = 'SET_STATUS'
 
-type ActionsType = AddPostActionType | ChangePostActionType | SetUserProfileActionType | GetStatusActionType
+export type ProfileActionsType =
+    | AddPostActionType
+    | ChangePostActionType
+    | SetUserProfileActionType
+    | GetStatusActionType
 
-type AddPostActionType = {
-    type: 'ADD-NEW-POST',
-    newMessagePost: string
-}
+type AddPostActionType = ReturnType<typeof addPost> // лучше типизировать так
 type ChangePostActionType = {
     type: "CHANGE-NEW-POST",
     postText: string
@@ -69,7 +70,7 @@ let initialState: ProfilePageType = {
     status: ''
 }
 
-export const profileReducer = (state: ProfilePageType = initialState, action: ActionsType): ProfilePageType => {
+export const profileReducer = (state: ProfilePageType = initialState, action: ProfileActionsType): ProfilePageType => {
     switch (action.type) {
         case ADD_NEW_POST:
             let newPost = {
@@ -99,8 +100,8 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
 
 ///////////////////////////////////////////////// action creators //////////////////////////////
 
-export const addPost = (newMessagePost: string): AddPostActionType => {
-    return {type: ADD_NEW_POST, newMessagePost: newMessagePost}
+export const addPost = (newMessagePost: string) => {
+    return {type: ADD_NEW_POST, newMessagePost: newMessagePost} as const
 }
 export const setUserProfile = (userProfile: UserProfileType): SetUserProfileActionType => {
     return {type: SET_USER_PROFILE, userProfile: userProfile}
@@ -111,20 +112,20 @@ export const setStatus = (status: string): GetStatusActionType => {
 
 //////////////////////////////////////////////////// THUNK //////////////////////////////////////
 
-export const getProfile = (userId: string | undefined, myId: number | null) => {
+export const getProfile = (userId: number): AppThunkType => {
 
-    return (dispatch: Dispatch) => {
+    return (dispatch) => {
         dispatch(toggleLoading(true))
-        profileApi.getProfile(userId, myId)
+        profileApi.getProfile(userId)
             .then(res => {
                 dispatch(toggleLoading(false))
                 dispatch(setUserProfile(res.data))
             })
     }
 }
-export const getStatus = (userId: string | undefined, myId: number | null) => {
+export const getStatus = (userId: string | undefined, myId: number | null): AppThunkType => {
 
-    return (dispatch: Dispatch) => {
+    return (dispatch) => {
         dispatch(toggleLoading(true))
         profileApi.getStatus(userId, myId)
             .then(res => {
@@ -133,9 +134,9 @@ export const getStatus = (userId: string | undefined, myId: number | null) => {
             })
     }
 }
-export const updateStatus = (status: string) => {
+export const updateStatus = (status: string): AppThunkType => {
 
-    return (dispatch: Dispatch) => {
+    return (dispatch) => {
         profileApi.updateStatus(status)
             .then(res => {
                 if(res.data.resultCode === 0)

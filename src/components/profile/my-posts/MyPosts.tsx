@@ -3,7 +3,7 @@ import React from "react";
 import {Post} from "./post/Post";
 import {PostType} from "../../../redux/profilePageReducer";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {ButtonOn} from "../../common/buttons/ButtonOn";
+import {Button} from "../../common/buttons/Button";
 import {Textarea} from "../../common/form-elements/FormElements";
 import {maxLength10, required} from "../../../utils/validators/validators";
 
@@ -50,7 +50,7 @@ const AddPostForm: React.FC<InjectedFormProps<FormPostDataType>> = (props) => {
                        component={Textarea}
                        validate={[required, maxLength10]}
                 />
-                <ButtonOn buttonName={'add post'}/>
+                <Button buttonName={'add post'}/>
             </div>
         </form>
     )

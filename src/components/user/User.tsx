@@ -1,7 +1,7 @@
 import s from './User.module.css'
 import React from "react";
 import {UserType} from "../../redux/usersReducer";
-import {ButtonOn} from "../common/buttons/ButtonOn";
+import {Button} from "../common/buttons/Button";
 import {NavLink} from "react-router-dom";
 import {DisabledButton} from "../common/buttons/ButtonDisabled";
 
@@ -39,7 +39,7 @@ export const User: React.FC<PropsType> = (props) => {
                     <DisabledButton
                         buttonName={user.followed ? 'unfollow' : 'follow'}
                     /> :
-                    <ButtonOn
+                    <Button
                         onClickHandler={user.followed ? stopFollowing : startFollowing}
                         buttonName={user.followed ? 'unfollow' : 'follow'}
                     />

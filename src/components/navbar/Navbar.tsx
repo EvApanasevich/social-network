@@ -1,7 +1,7 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
 import s from "./Navbar.module.css"
-import {ButtonOn} from "../common/buttons/ButtonOn";
+import {Button} from "../common/buttons/Button";
 import {NavbarPropsType} from "./NavbarContainer";
 
 export const Navbar: React.FC<NavbarPropsType> = (props) => {
@@ -40,8 +40,8 @@ export const Navbar: React.FC<NavbarPropsType> = (props) => {
                 <div className={s.friends}>
                     {sidebar.showFriends && friends}
                 </div>
-                {sidebar.showFriends ? <ButtonOn onClickHandler={show} buttonName={'hide friends'}/> :
-                    <ButtonOn onClickHandler={show} buttonName={'show friends'}/>}
+                {sidebar.showFriends ? <Button onClickHandler={show} buttonName={'hide friends'}/> :
+                    <Button onClickHandler={show} buttonName={'show friends'}/>}
             </div>
         </nav>
     )

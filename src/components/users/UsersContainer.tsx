@@ -1,12 +1,20 @@
 import {connect} from "react-redux";
 import {
-    follow, getUsers,
+    follow, requestUsers,
     unfollow,
     UserType
 } from "../../redux/usersReducer";
 import {AppRootStateType} from "../../redux/Redux-store";
 import React from "react";
 import {Users} from "./Users";
+import {
+    getCount,
+    getCurrentPage,
+    getFollowingProgress,
+    getLoading,
+    getTotalCount,
+    getUsers
+} from "../../redux/usersSelectors";
 
 type UsersPropsType = MapStatePropsType & MapDispatchPropsType
 
@@ -54,14 +62,14 @@ class UsersApiContainer extends React.Component<UsersPropsType> {
 
 const mapStateToProps = (state: AppRootStateType): MapStatePropsType => {
     return {
-        users: state.usersPage.users,
-        count: state.usersPage.count,
-        totalCount: state.usersPage.totalCount,
-        currentPage: state.usersPage.currentPage,
-        loading: state.usersPage.loading,
-        followingProgress: state.usersPage.followingProgress
+        users: getUsers(state),
+        count: getCount(state),
+        totalCount: getTotalCount(state),
+        currentPage: getCurrentPage(state),
+        loading: getLoading(state),
+        followingProgress: getFollowingProgress(state)
     }
 }
 
 export const UsersContainer = connect(mapStateToProps,
-    {follow, unfollow, getUsers})(UsersApiContainer)
+    {follow, unfollow, getUsers: requestUsers})(UsersApiContainer)

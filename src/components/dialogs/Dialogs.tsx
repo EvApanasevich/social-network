@@ -4,14 +4,14 @@ import {Message} from "./message/Message";
 import React from "react";
 import {DialogsPropsType} from "./DialogsContainer";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {ButtonOn} from "../common/buttons/ButtonOn";
+import {Button} from "../common/buttons/Button";
 import {maxLength10, required} from "../../utils/validators/validators";
 import {Textarea} from "../common/form-elements/FormElements";
 
 export const Dialogs: React.FC<DialogsPropsType> = (props) => {
     const {sendMessage, dialogPage,} = props
 
-    const dialogsItem = dialogPage.dialogs.map((d) => <DialogItem name={d.name} id={d.id}/>)
+    const dialogsItem = dialogPage.dialogs.map((d) => <DialogItem key={d.id} name={d.name} id={d.id}/>)
     const messageElement = dialogPage.messages.map((m) => <Message key={m.id} message={m.message}/>)
 
     const sendNewMessage = (formData: FormMessageDataType) => {
@@ -51,7 +51,7 @@ const AddMessageForm: React.FC<InjectedFormProps<FormMessageDataType>> = (props)
                        component={Textarea}
                        validate={[required, maxLength10]}
                 />
-                <ButtonOn buttonName={'add message'}/>
+                <Button buttonName={'add message'}/>
             </div>
         </form>
     )

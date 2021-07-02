@@ -6,7 +6,7 @@ type ButtonPropsType = {
     buttonName?: string
 }
 
-export const ButtonOn: React.FC<ButtonPropsType> = (props) => {
+export const Button: React.FC<ButtonPropsType> = (props) => {
     const {
         onClickHandler,
         buttonName,

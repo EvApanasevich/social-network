@@ -21,13 +21,13 @@ type MapStatePropsType = {
     userProfile: UserProfileType | null
     loading: boolean
     isAuth: boolean
-    myId: number | null
+    myId: string | undefined
     status: string | ''
 }
 type MapDispatchPropsType = {
     addPost: (newMessagePost: string) => void
-    getProfile: (userId: string | undefined, myId: number | null) => void
-    getStatus: (userId: string | undefined, myId: number | null) => void
+    getProfile: (userId: string | undefined) => void
+    getStatus: (userId: string | undefined) => void
     updateStatus: (status: string) => void
 }
 type PathParamsType = {
@@ -39,9 +39,12 @@ type PropsType = RouteComponentProps<PathParamsType> & ProfilePropsType
 class ProfileContainer extends React.Component<PropsType> {
 
     componentDidMount(): void {
-        const userId = this.props.match.params.userId    //<==== get the id from the browser line using (withRouter)
-        this.props.getProfile(userId, this.props.myId)
-        this.props.getStatus(userId, this.props.myId)
+        let userId = this.props.match.params.userId    //<==== get the id from the browser line using (withRouter)
+        if(!userId) {
+            userId = this.props.myId
+        }
+        this.props.getProfile(userId)
+        this.props.getStatus(userId)
     }
 
     render() {
