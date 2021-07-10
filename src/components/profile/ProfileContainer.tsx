@@ -76,9 +76,9 @@ const mapStateToProps = (state: AppRootStateType): MapStatePropsType => {
     }
 }
 
-export default compose<React.ComponentType>(                                                // по очереди обворачиваем
-    connect(mapStateToProps, {addPost, getProfile, getStatus, updateStatus}),        // контейнерными компонентами
-    withRouter,
-    withAuthRedirect
+export default compose<React.ComponentType>(                                                         // по очереди обворачиваем
+    connect(mapStateToProps, {addPost, getProfile, getStatus, updateStatus}),        //
+    withRouter,                                                                                      // HOC - ами
+    withAuthRedirect                                                                                 // Higher-Order Component
 ) (ProfileContainer)
 

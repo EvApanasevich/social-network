@@ -29,7 +29,7 @@ type MapStatePropsType = {
 type MapDispatchPropsType = {
     follow: (userId: number) => void
     unfollow: (userId: number) => void
-    getUsers: (currentPage: number, count: number) => void
+    requestUsers: (currentPage: number, count: number) => void
 }
 
 /////////////////////////////////////////////////////// Container class Api component ////////////////////////////
@@ -37,7 +37,7 @@ type MapDispatchPropsType = {
 class UsersApiContainer extends React.Component<UsersPropsType> {
 
     componentDidMount(): void {
-        this.props.getUsers(this.props.currentPage, this.props.count)
+        this.props.requestUsers(this.props.currentPage, this.props.count)
     }
 
     render() {
@@ -51,7 +51,7 @@ class UsersApiContainer extends React.Component<UsersPropsType> {
                         followingProgress={this.props.followingProgress}
                         follow={this.props.follow}
                         unfollow={this.props.unfollow}
-                        getUsers={this.props.getUsers}
+                        requestUsers={this.props.requestUsers}
                     />
             </>
         )
@@ -60,16 +60,16 @@ class UsersApiContainer extends React.Component<UsersPropsType> {
 
 //////////////////////////////////////////////// Container component ////////////////////////////////////
 
-const mapStateToProps = (state: AppRootStateType): MapStatePropsType => {
-    return {
-        users: getUsers(state),
-        count: getCount(state),
-        totalCount: getTotalCount(state),
-        currentPage: getCurrentPage(state),
-        loading: getLoading(state),
-        followingProgress: getFollowingProgress(state)
+const mapStateToProps = (state: AppRootStateType): MapStatePropsType => {     //     using selectors
+    return {                                                                  //             |
+        users: getUsers(state),                                               //             |
+        count: getCount(state),                                               //     <<<-----|
+        totalCount: getTotalCount(state),                                     //
+        currentPage: getCurrentPage(state),                                   //
+        loading: getLoading(state),                                           //
+        followingProgress: getFollowingProgress(state)                        //
     }
 }
 
 export const UsersContainer = connect(mapStateToProps,
-    {follow, unfollow, getUsers: requestUsers})(UsersApiContainer)
+    {follow, unfollow, requestUsers})(UsersApiContainer)

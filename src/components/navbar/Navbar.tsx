@@ -6,7 +6,7 @@ import {NavbarPropsType} from "./NavbarContainer";
 
 export const Navbar: React.FC<NavbarPropsType> = (props) => {
     const {
-        show,
+        changeShowFriends,
         sidebar
     } = props
 
@@ -40,8 +40,8 @@ export const Navbar: React.FC<NavbarPropsType> = (props) => {
                 <div className={s.friends}>
                     {sidebar.showFriends && friends}
                 </div>
-                {sidebar.showFriends ? <Button onClickHandler={show} buttonName={'hide friends'}/> :
-                    <Button onClickHandler={show} buttonName={'show friends'}/>}
+                {sidebar.showFriends ? <Button onClickHandler={changeShowFriends} buttonName={'hide friends'}/> :
+                    <Button onClickHandler={changeShowFriends} buttonName={'show friends'}/>}
             </div>
         </nav>
     )

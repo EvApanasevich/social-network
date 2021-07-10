@@ -12,14 +12,14 @@ type PropsType = {
     addPost: (newMessagePost: string) => void
 }
 
-export const MyPosts: React.FC<PropsType> = (props) => {
+export const MyPosts: React.FC<PropsType> = React.memo((props) => {
+    console.log('render')
     const {addPost, posts,} = props
 
-    const postsElement = posts.map((p) => <Post key={p.id} message={p.message} likes={p.likes}/>)
+    const postsElement = [...posts].reverse().map((p) => <Post key={p.id} message={p.message} likes={p.likes}/>)
 
     const AddNewPost = (formData: FormPostDataType) => {
         addPost(formData.newPost)
-        console.log(formData)
     }
 
     return (
@@ -33,7 +33,7 @@ export const MyPosts: React.FC<PropsType> = (props) => {
             </div>
         </div>
     )
-}
+})
 
 export type FormPostDataType = {
     newPost: string

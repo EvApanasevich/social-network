@@ -4,7 +4,6 @@ import {Route, withRouter} from "react-router-dom";
 import {Settings} from "./components/settings/Settings";
 import {News} from "./components/news/News";
 import {Music} from "./components/music/Music";
-import {DialogsContainer} from "./components/dialogs/DialogsContainer";
 import {NavbarContainer} from "./components/navbar/NavbarContainer";
 import {UsersContainer} from "./components/users/UsersContainer";
 import ProfileContainer from "./components/profile/ProfileContainer";
@@ -15,6 +14,7 @@ import {compose} from 'redux';
 import {initializeApp} from "./redux/AppReducer";
 import {AppRootStateType} from "./redux/Redux-store";
 import {Preloader} from "./components/common/preloader/Preloader";
+import {DialogsContainer} from "./components/dialogs/DialogsContainer";
 
 type PropsType = {
     initializeApp: () => void
@@ -41,6 +41,7 @@ class App extends React.Component<PropsType> {
                     <div className={'app-wrapper-content'}>
                         <Route path='/dialogs' render={() => <DialogsContainer/>}/>
                         <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
+                        <Route exact path='/' render={() => <ProfileContainer/>}/>
                         <Route path='/users' render={() => <UsersContainer/>}/>
                         <Route path='/music' render={() => <Music/>}/>
                         <Route path='/news' render={() => <News/>}/>

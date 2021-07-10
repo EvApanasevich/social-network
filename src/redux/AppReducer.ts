@@ -1,13 +1,10 @@
-import {authApi} from "../api/api";
 import {AppThunkType} from "./Redux-store";
 import {getAuthMe} from "./authReducer";
 
-const SET_INITIALIZATION = 'SET_INITIALIZATION'
+const SET_INITIALIZATION = 'SOCIAL-NETWORK/APP/SET_INITIALIZATION'
 
 export type AppCommonActionType = SetInitializationActionType
-
 type SetInitializationActionType = ReturnType<typeof setInitialization>
-
 export type AppCommonType = {
     initialized: boolean
 }

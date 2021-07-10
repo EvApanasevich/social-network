@@ -1,17 +1,10 @@
 import {v1} from "uuid";
 
-const ADD_NEW_MESSAGE = 'ADD-NEW-MESSAGE'
+const ADD_NEW_MESSAGE = 'SOCIAL-NETWORK/DIALOG/ADD-NEW-MESSAGE'
 
-export type DialogPageActionsType = AddMessageActionType | ChangeMessageActionType
+export type DialogPageActionsType = AddMessageActionType
 
-type AddMessageActionType = {
-    type: "ADD-NEW-MESSAGE"
-    newMessage: string
-}
-type ChangeMessageActionType = {
-    type: 'CHANGE-NEW-MESSAGE',
-    messageText: string
-}
+type AddMessageActionType = ReturnType<typeof sendMessage>
 
 export type DialogPageType = {
     dialogs: Array<DialogType>
@@ -52,9 +45,6 @@ export const dialogReducer = (state: DialogPageType = initialState, action: Dial
     }
 }
 
-export const sendMessage = (newMessage: string): AddMessageActionType => {
-    return {
-        type: ADD_NEW_MESSAGE,
-        newMessage: newMessage
-    }
+export const sendMessage = (newMessage: string) => {
+    return {type: ADD_NEW_MESSAGE, newMessage: newMessage} as const
 }

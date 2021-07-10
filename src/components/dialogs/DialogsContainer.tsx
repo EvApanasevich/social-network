@@ -4,12 +4,12 @@ import {connect} from "react-redux";
 import {AppRootStateType} from "../../redux/Redux-store";
 import {withAuthRedirect} from "../../hok/withAuthRedirect";
 import { compose } from "redux";
+import React from "react";
 
 export type DialogsPropsType = MapStatePropsType & MapDispatchPropsType
 
 type MapStatePropsType = {
     dialogPage: DialogPageType
-    isAuth: boolean
 }
 type MapDispatchPropsType = {
     sendMessage: (newMessage: string) => void
@@ -17,16 +17,11 @@ type MapDispatchPropsType = {
 
 const mapStateToProps = (state: AppRootStateType): MapStatePropsType => {
     return {
-        dialogPage: state.dialogPage,
-        isAuth: state.auth.isAuth
+        dialogPage: state.dialogPage
     }
 }
 
-compose(
+export const DialogsContainer = compose<React.ComponentType>(
     connect(mapStateToProps, {sendMessage}),
     withAuthRedirect,
 ) (Dialogs)
-
-const withAuthRedirectContainer = withAuthRedirect(Dialogs)
-
-export const DialogsContainer = connect(mapStateToProps, {sendMessage}) (withAuthRedirectContainer)

@@ -1,12 +1,9 @@
 import {v1} from "uuid";
 
-const CHANGE_SHOW_FRIENDS = 'CHANGE-SHOW-FRIENDS'
+const CHANGE_SHOW_FRIENDS = 'SOCIAL-NETWORK/SIDEBAR/CHANGE-SHOW-FRIENDS'
 
-export type SidebarActionsType = ChangeShowFriends
-
-type ChangeShowFriends = {
-    type: 'CHANGE-SHOW-FRIENDS'
-}
+export type SidebarActionsType = ChangeShowFriendsActionType
+type ChangeShowFriendsActionType = ReturnType<typeof changeShowFriends>
 
 export type SidebarType = {
     friends: Array<FriendsType>
@@ -39,8 +36,6 @@ export const sidebarReducer = (state: SidebarType = initialState, action: Sideba
     }
 }
 
-export const changeShowFriendsAC = (): ChangeShowFriends => {
-    return {
-        type: CHANGE_SHOW_FRIENDS
-    }
+export const changeShowFriends = () => {
+    return {type: CHANGE_SHOW_FRIENDS} as const
 }
