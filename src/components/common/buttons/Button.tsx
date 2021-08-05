@@ -4,15 +4,17 @@ import s from './Buttons.module.css'
 type ButtonPropsType = {
     onClickHandler?: () => void
     buttonName?: string
+    style?: {}
 }
 
 export const Button: React.FC<ButtonPropsType> = (props) => {
     const {
         onClickHandler,
         buttonName,
+        style,
     } = props
 
-    const [style, setStyle] = useState<boolean>(false)
+    const [st, setStyle] = useState<boolean>(false)
     const setClass = (event: MouseEvent<HTMLButtonElement>) => {
         setStyle(true)
     }
@@ -25,8 +27,9 @@ export const Button: React.FC<ButtonPropsType> = (props) => {
             <button
                 onMouseEnter={setClass}
                 onMouseLeave={delClass}
-                className={style ? s.active : s.button}
+                className={st ? s.active : s.button}
                 onClick={onClickHandler}
+                style={style}
             >
                 {buttonName}
             </button>

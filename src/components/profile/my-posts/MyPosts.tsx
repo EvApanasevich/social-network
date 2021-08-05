@@ -10,13 +10,23 @@ import {maxLength10, required} from "../../../utils/validators/validators";
 type PropsType = {
     posts: Array<PostType>
     addPost: (newMessagePost: string) => void
+    profilePhoto?: string | null
 }
 
 export const MyPosts: React.FC<PropsType> = React.memo((props) => {
-    console.log('render')
-    const {addPost, posts,} = props
+    const {
+        addPost,
+        posts,
+        profilePhoto,
+    } = props
 
-    const postsElement = [...posts].reverse().map((p) => <Post key={p.id} message={p.message} likes={p.likes}/>)
+    const postsElement = [...posts].reverse().map((p) =>
+        <Post
+        key={p.id}
+        message={p.message}
+        likes={p.likes}
+        profilePhoto={profilePhoto}
+        />)
 
     const AddNewPost = (formData: FormPostDataType) => {
         addPost(formData.newPost)
@@ -24,12 +34,14 @@ export const MyPosts: React.FC<PropsType> = React.memo((props) => {
 
     return (
         <div>
-            <h3 className={s.heading}>My posts</h3>
+            <h3 className={s.heading}>-- My posts --</h3>
             <div className={s.add_post}>
                 <AddPostReduxForm onSubmit={AddNewPost}/>
             </div>
             <div className={s.post}>
+
                 {postsElement}
+
             </div>
         </div>
     )

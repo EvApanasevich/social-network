@@ -1,6 +1,5 @@
 import React, {ChangeEvent, useEffect, useState} from 'react'
 
-
 type ProfileStatusPropsType = {
     status: string
     updateStatus: (status: string) => void
@@ -8,8 +7,8 @@ type ProfileStatusPropsType = {
 
 export const ProfileStatus = (props: ProfileStatusPropsType) => {
 
-    const [editMode, setEditMode] = useState(false)
-    const [status, setStatus] = useState('')
+    const [editMode, setEditMode] = useState<boolean>(false)
+    const [status, setStatus] = useState<string>('')
 
     useEffect(() => {
         setStatus(props.status)
@@ -27,11 +26,11 @@ export const ProfileStatus = (props: ProfileStatusPropsType) => {
     }
 
     return (
-        <div style={{marginLeft: '20px'}}>
+        <div>
             {!editMode &&
             <div>
                     <span onDoubleClick={activateEditMode}>
-                        {status ? status : 'What is new?'}
+                        {props.status ? props.status : 'What is new?'}
                     </span>
             </div>}
             {editMode &&

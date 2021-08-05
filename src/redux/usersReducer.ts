@@ -148,17 +148,31 @@ export const requestUsers = (currentPage: number, count: number): AppThunkType =
 }
 
 export const follow = (userId: number): AppThunkType => async dispatch => {
-    followUnfollowFlow(dispatch, userId, usersApi.follow(userId), successedFollow)
+    dispatch(toggleFollowingProgress(true, userId))
+    const res = await usersApi.follow(userId)
+    if (res.data.resultCode === 0) {
+        dispatch(successedFollow(userId))
+    }
+    dispatch(toggleFollowingProgress(false, userId))
+
+    /*followUnfollowFlow(dispatch, userId, usersApi.follow(userId), successedFollow)*/
 }
 
 export const unfollow = (userId: number): AppThunkType => async dispatch => {
-    followUnfollowFlow(dispatch, userId, usersApi.unfollow(userId), successedUnfollow)
+    dispatch(toggleFollowingProgress(true, userId))
+    const res = await usersApi.unfollow(userId)
+    if (res.data.resultCode === 0) {
+        dispatch(successedUnfollow(userId))
+    }
+    dispatch(toggleFollowingProgress(false, userId))
+
+  /*  followUnfollowFlow(dispatch, userId, usersApi.unfollow(userId), successedUnfollow)*/
 }
 
+/*
 const followUnfollowFlow = async (dispatch: Dispatch<UsersActionsType>,                 //// Helper function
-                                  userId: number,
-                                  apiMethod: any,
-                                  actionCreator: (userId: number) => FollowActionType | UnfollowActionType) => {
+                                  userId: number | null, apiMethod: any,
+                                  actionCreator: (userId: number | null) => FollowActionType | UnfollowActionType) => {
     dispatch(toggleFollowingProgress(true, userId))
     const res = await apiMethod(userId)
     if (res.data.resultCode === 0) {
@@ -166,3 +180,4 @@ const followUnfollowFlow = async (dispatch: Dispatch<UsersActionsType>,         
     }
     dispatch(toggleFollowingProgress(false, userId))
 }
+*/

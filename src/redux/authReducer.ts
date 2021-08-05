@@ -1,33 +1,37 @@
-import {authApi} from "../api/api";
+import {authApi, securityApi} from "../api/api";
 import {AppThunkType} from "./Redux-store";
 import {stopSubmit} from "redux-form";
 
 const SET_AUTH_DATA = 'SOCIAL-NETWORK/AUTH/SET_AUTH_DATA'
+const SET_CAPTCHA_URL = 'SOCIAL-NETWORK/AUTH/SET_CAPTCHA_URL'
 
-export type AuthActionType = SetAuthActionType
+export type AuthActionType = SetAuthActionType | SetCaptchaUrlType
 type SetAuthActionType = ReturnType<typeof setAuthData>
+type SetCaptchaUrlType = ReturnType<typeof setCaptchaUrl>
 
 export type AuthType = {
-    id: string | undefined,
+    id: number | null,
     email: string | null,
     login: string | null,
-    isAuth: boolean
+    isAuth: boolean,
+    captchaUrl: string | null
 }
 
-const initialState: AuthType = {
-    id: undefined,
+const initialState = {
+    id: null,
     email: null,
     login: null,
-    isAuth: false
+    isAuth: false,
+    captchaUrl: null
 }
 
 export const authReducer = (state: AuthType = initialState, action: AuthActionType): AuthType => {
     switch (action.type) {
         case SET_AUTH_DATA:
+        case SET_CAPTCHA_URL:
             return {
                 ...state,
                 ...action.payload,
-                isAuth: action.isAuth
             }
         default:
             return state
@@ -36,8 +40,11 @@ export const authReducer = (state: AuthType = initialState, action: AuthActionTy
 
 //////////////////////////////////////////////////// action creators ///////////////////////////////
 
-export const setAuthData = (id: string | undefined, email: string | null, login: string | null, isAuth: boolean) => {
-    return {type: SET_AUTH_DATA, payload: {id, email, login}, isAuth: isAuth} as const
+export const setAuthData = (id: number | null, email: string | null, login: string | null, isAuth: boolean) => {
+    return {type: SET_AUTH_DATA, payload: {id, email, login, isAuth: isAuth}} as const
+}
+export const setCaptchaUrl = (captchaUrl: string | null) => {
+    return {type: SET_CAPTCHA_URL, payload: {captchaUrl}} as const
 }
 
 //////////////////////////////////////////////////// THUNK //////////////////////////////////////////
@@ -52,12 +59,15 @@ export const getAuthMe = (): AppThunkType => async dispatch => {
     return res
 }
 
-export const login = (email: string, password: string, rememberMe: boolean): AppThunkType => async dispatch => {
+export const login = (email: string, password: string, rememberMe: boolean, captcha: string): AppThunkType => async dispatch => {
 
-    const res = await authApi.login(email, password, rememberMe)
+    const res = await authApi.login(email, password, rememberMe, captcha)
     if (res.data.resultCode === 0) {
         dispatch(getAuthMe())
     } else {
+        if (res.data.resultCode === 10) {
+            dispatch(getCaptcha())
+        }
         const errorMessage = res.data.messages.length > 0 ? res.data.messages[0] : 'Some error!'
         dispatch(stopSubmit('login', {_error: errorMessage}))
     }
@@ -67,6 +77,12 @@ export const logout = (): AppThunkType => async dispatch => {
 
     const res = await authApi.logout()
     if (res.data.resultCode === 0) {
-        dispatch(setAuthData(undefined, null, null, false))
+        dispatch(setAuthData(null, null, null, false))
+        dispatch(setCaptchaUrl(null))
     }
+}
+
+export const getCaptcha = (): AppThunkType => async dispatch => {
+    const res = await securityApi.getCaptchaUrl()
+    dispatch(setCaptchaUrl(res.data.url))
 }

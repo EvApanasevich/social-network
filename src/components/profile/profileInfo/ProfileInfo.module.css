@@ -1,4 +1,4 @@
-.info {
+.profileInfoBlock {
     display: flex;
     justify-content: flex-start;
     padding: 10px;
@@ -6,3 +6,28 @@
     border: 1px solid black;
     background-color: white;
 }
+
+.status {
+    align-self: center;
+    color: crimson;
+    padding-top: 10px;
+}
+
+.info {
+    width: 100%;
+    align-self: stretch;
+    color: #0071ff;
+    padding: 0 10px 10px 10px;
+    margin-left: 10px;
+}
+.info_form {
+    padding: 0 10px 10px 10px;
+    margin-left: 10px;
+}
+.info span, u {
+    color: #000065;
+}
+.error {
+    color: red;
+}
+

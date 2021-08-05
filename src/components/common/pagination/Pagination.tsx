@@ -24,19 +24,19 @@ export const Pagination = (props: PaginationPropsType) => {
         numbersOfPages.push(i)
     }
 
-    const currentBlockPages = useMemo(() => (Math.floor((currentPage - 1) / pagesInBlock) * pagesInBlock),
+    const currentPagesBlock = useMemo(() => (Math.floor((currentPage - 1) / pagesInBlock) * pagesInBlock),
         [currentPage, pagesInBlock])
 
     const prev = useCallback(() => {
         if (currentPage > pagesInBlock) {
-            requestUsers(currentBlockPages - pagesInBlock + 1, count)
+            requestUsers(currentPagesBlock - pagesInBlock + 1, count)
         }
-    }, [currentPage, pagesInBlock, requestUsers, currentBlockPages, count])
+    }, [currentPage, pagesInBlock, requestUsers, currentPagesBlock, count])
     const next = useCallback(() => {
-        if (currentPage <= pagesCount - pagesInBlock) {
-            requestUsers(currentBlockPages + pagesInBlock + 1, count)
+        if (currentPagesBlock + pagesInBlock < numbersOfPages.length) {
+            requestUsers(currentPagesBlock + pagesInBlock + 1, count)
         }
-    }, [currentPage, pagesInBlock, pagesCount, requestUsers, currentBlockPages, count])
+    }, [currentPage, pagesInBlock, pagesCount, requestUsers, currentPagesBlock, count])
 
     const startPage = () => {
         requestUsers(1, count)
@@ -54,7 +54,7 @@ export const Pagination = (props: PaginationPropsType) => {
                     {currentPage > pagesInBlock &&
                     <div style={{marginRight: '20px'}} onClick={prev}> {'<=='} </div>}
 
-                    {numbersOfPages.slice(currentBlockPages, currentBlockPages + pagesInBlock).map(p => {
+                    {numbersOfPages.slice(currentPagesBlock, currentPagesBlock + pagesInBlock).map(p => {
                         return <span
                             style={{padding: ' 0 5px 0 5px'}}
                             key={p}
@@ -63,7 +63,7 @@ export const Pagination = (props: PaginationPropsType) => {
                     {p} </span>
                     })}
 
-                    {currentBlockPages + pagesInBlock < numbersOfPages.length &&
+                    {currentPagesBlock + pagesInBlock < numbersOfPages.length &&
                     <div style={{marginLeft: '20px'}} onClick={next}> {'==>'} </div>}
                 </div>
 

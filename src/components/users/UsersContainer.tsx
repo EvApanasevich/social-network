@@ -34,7 +34,7 @@ type MapDispatchPropsType = {
 
 /////////////////////////////////////////////////////// Container class Api component ////////////////////////////
 
-class UsersApiContainer extends React.Component<UsersPropsType> {
+class UsersContainer extends React.Component<UsersPropsType> {
 
     componentDidMount(): void {
         this.props.requestUsers(this.props.currentPage, this.props.count)
@@ -71,5 +71,5 @@ const mapStateToProps = (state: AppRootStateType): MapStatePropsType => {     //
     }
 }
 
-export const UsersContainer = connect(mapStateToProps,
-    {follow, unfollow, requestUsers})(UsersApiContainer)
+export default connect(mapStateToProps,
+    {follow, unfollow, requestUsers})(UsersContainer)

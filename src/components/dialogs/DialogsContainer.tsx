@@ -21,7 +21,7 @@ const mapStateToProps = (state: AppRootStateType): MapStatePropsType => {
     }
 }
 
-export const DialogsContainer = compose<React.ComponentType>(
+export default compose<React.ComponentType>(
     connect(mapStateToProps, {sendMessage}),
     withAuthRedirect,
 ) (Dialogs)

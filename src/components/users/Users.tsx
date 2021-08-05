@@ -50,6 +50,12 @@ export const Users = (props: PropsType) => {
                         followingProgress={followingProgress}
                     />
                 )}
+            <Pagination
+                totalCount={totalCount}
+                count={count}
+                currentPage={currentPage}
+                requestUsers={requestUsers}
+            />
         </div>
     )
 }
