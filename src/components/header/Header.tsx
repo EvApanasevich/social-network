@@ -12,10 +12,10 @@ type PropsType = {
 export const Header = (props: PropsType) => {
     return (
         <header className={s.header}>
-            <div className={s.login}>
+            <div className={s.headerContainer}>
                 {props.isAuth ?
-                    <div> {props.login} <Button onClickHandler={props.logout} buttonName={'LogOut'}/> </div>
-                    : <NavLink to={'/login'}>Login</NavLink>}
+                    <div className={s.login}> {props.login} <Button onClickHandler={props.logout} buttonName={'LogOut'}/> </div>
+                    : <NavLink className={s.navlink} to={'/login'}>Login</NavLink>}
             </div>
         </header>
     )

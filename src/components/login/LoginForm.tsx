@@ -5,6 +5,7 @@ import {maxLength100, required} from "../../utils/validators/validators";
 import s from "./Login.module.css";
 import {Button} from "../common/buttons/Button";
 import {FormType} from "./Login";
+import style from './Login.module.css'
 
 type OwnPropsType = {
     captchaUrl: string | null
@@ -13,25 +14,26 @@ type OwnPropsType = {
 const LoginForm: React.FC<InjectedFormProps<FormType, OwnPropsType> & OwnPropsType> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
-            <div>
+            <div className={style.input}>
                 <Field placeholder={'email'}
                        name={'email'}
                        component={Input}
                        validate={[required, maxLength100]}
                 />
             </div>
-            <div>
+            <div className={style.input}>
                 <Field placeholder={'password'}
                        name={'password'}
                        component={Input}
                        validate={[required, maxLength100]}
                 />
             </div>
-            <div>
+            <div className={style.checkbox}>
                 <Field component={Input}
                        name={'rememberMe'}
                        type={'checkbox'}
-                /> remember me
+                />
+                <p>remember me</p>
             </div>
             {props.captchaUrl && <img src={props.captchaUrl}/>}
             {props.captchaUrl &&
@@ -42,7 +44,7 @@ const LoginForm: React.FC<InjectedFormProps<FormType, OwnPropsType> & OwnPropsTy
                 />
             </div>}
             {props.error && <div className={s.error}>{props.error}</div>}
-            <div>
+            <div className={style.btn}>
                 <Button buttonName={'Login'}/>
             </div>
         </form>

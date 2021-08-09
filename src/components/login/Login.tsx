@@ -4,6 +4,7 @@ import {login} from "../../redux/authReducer";
 import { Redirect } from 'react-router-dom';
 import {AppRootStateType} from "../../redux/Redux-store";
 import LoginForm from "./LoginForm";
+import style from "./Login.module.css";
 
 type MapStatePropsType = {
     isAuth: boolean
@@ -32,8 +33,13 @@ const Login: React.FC<MapStatePropsType & MapDispatchPropsType>= (props) => {
     }
 
     return (
-        <div>
-            <h1>Login</h1>
+        <div  className={style.logForm}>
+            <div className={style.info}>
+                To login in the application, please enter the email and password of the test account<br/>
+                Email: <span>free@samuraijs.com</span><br/>
+                Password: <span>free</span>
+            </div>
+            <h2>Login</h2>
             <LoginForm captchaUrl={captchaUrl} onSubmit={onSubmit}/>
         </div>
     )
