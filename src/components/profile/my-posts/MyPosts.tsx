@@ -14,11 +14,7 @@ type PropsType = {
 }
 
 export const MyPosts: React.FC<PropsType> = React.memo((props) => {
-    const {
-        addPost,
-        posts,
-        profilePhoto,
-    } = props
+    const {addPost, posts, profilePhoto,} = props
 
     const postsElement = [...posts].reverse().map((p) =>
         <Post

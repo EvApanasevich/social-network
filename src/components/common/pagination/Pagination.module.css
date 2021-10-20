@@ -1,14 +1,14 @@
 .users_page button {
-    margin: 5px;
+   margin: 5px;
 }
-
 .selectedPage {
-    font-weight: bold;
-    border: 1px solid crimson;
-
+   font-weight: bold;
+   border: 1px solid crimson;
 }
-
 .pages {
-    display: flex;
-    justify-content: space-between;
+   display: flex;
+   justify-content: space-between;
+}
+.pages span {
+   cursor: pointer;
 }

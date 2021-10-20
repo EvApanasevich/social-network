@@ -1,4 +1,4 @@
-import {sendMessage, DialogPageType} from "../../redux/dialogPageReducer";
+import {DialogPageType} from "../../redux/dialogPageReducer";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {AppRootStateType} from "../../redux/Redux-store";
@@ -22,6 +22,6 @@ const mapStateToProps = (state: AppRootStateType): MapStatePropsType => {
 }
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {sendMessage}),
+    connect(mapStateToProps),
     withAuthRedirect,
 ) (Dialogs)

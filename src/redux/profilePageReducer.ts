@@ -31,7 +31,7 @@ export type PostType = {
 }
 export type UserProfileType = {
     aboutMe: string
-    userId: number | null
+    userId: number
     lookingForAJob: boolean
     lookingForAJobDescription: string
     fullName: string
@@ -42,8 +42,8 @@ export type ContactsType = {
     [key: string]: string
 }
 type PhotosType = {
-    small: string | null
-    large: string | null
+    small: string
+    large: string
 }
 
 let initialState = {
@@ -52,7 +52,7 @@ let initialState = {
         {id: v1(), message: 'yo, yo', likes: 5},
         {id: v1(), message: 'ya-hu-how!', likes: 7}
     ] as Array<PostType>,
-    userProfile: null as UserProfileType | null,
+    userProfile: {} as UserProfileType,
     editForm: false,
     status: ''
 }

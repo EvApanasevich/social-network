@@ -35,7 +35,7 @@ const Login: React.FC<MapStatePropsType & MapDispatchPropsType>= (props) => {
     return (
         <div  className={style.logForm}>
             <div className={style.info}>
-                To login in the application, please enter the email and password of the test account<br/>
+                To login in the application, please enter the email and password of the test account (has restrictions on requests)<br/>
                 Email: <span>free@samuraijs.com</span><br/>
                 Password: <span>free</span>
             </div>

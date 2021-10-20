@@ -44,7 +44,7 @@ class App extends React.Component<PropsType> {
                         <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
                         <Route path='/dialogs' render={() => {
                             return <Suspense fallback={<Preloader/>}>
-                                <Dialogs/>
+                                 <Dialogs/>
                             </Suspense>
                         }}/>
                         <Route path='/users' render={() => {

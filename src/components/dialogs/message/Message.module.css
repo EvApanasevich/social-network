@@ -1,9 +1,55 @@
+.message_item {
+   display: flex;
+   margin: 10px;
+   align-items: flex-end;
+}
+.message_item img {
+   width: 40px;
+   height: 40px;
+   border: 1px solid black;
+   border-radius: 30px;
+}
+.corner {
+   height: 15px;
+   width: 15px;
+   background: radial-gradient(circle at 0 0, rgba(0, 0, 0, 0) 15px, rgb(231, 255, 234) 0);
+}
+.corner.is_my {
+   background: radial-gradient(circle at 0 0, rgba(0, 0, 0, 0) 15px, rgb(193, 255, 202) 0);
+}
 .message {
-    color: #000065;
-    border: 1px solid darkred;
-    width: 200px;
-    height: 20px;
-    margin: 10px 0px 5px 10px;
-    padding: 5px;
+   color: #000065;
+   max-width: 60%;
+   justify-content: space-between;
+   border-radius: 7px 7px 7px 0;
+   padding: 10px;
+   background-color: rgb(231, 255, 234);
+   word-wrap: break-word;
+}
+.message.is_my {
+   background-color: rgb(193, 255, 202);
+}
+.sender_name {
+   color: darkred;
+   font-weight: 600;
+   font-size: 15px;
+}
+.message_body {
+   display: flex;
+}
+.text {
+}
+.time {
+   display: flex;
+   align-items: flex-end;
+   padding: 5px;
+   color: darkgrey;
+}
+.x {
+   color: red;
+   text-align: center;
+   cursor: pointer;
+   font-weight: 700;
+   margin: 5px;
 }
 

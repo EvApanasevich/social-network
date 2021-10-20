@@ -1,6 +1,5 @@
 import {usersApi} from "../api/api";
 import {AppThunkType} from "./Redux-store";
-import {Dispatch} from "react";
 
 const UNFOLLOW = 'SOCIAL-NETWORK/USERS/UNFOLLOW'
 const FOLLOW = 'SOCIAL-NETWORK/USERS/FOLLOW'
