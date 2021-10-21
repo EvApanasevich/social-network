@@ -10,6 +10,7 @@ import { DialogsPropsType } from "./DialogsContainer";
 import { Message } from "./message/Message";
 import { AppRootStateType } from "../../redux/Redux-store"
 import { getProfile } from "../../redux/profilePageReducer";
+import ava from "../../assets/images/Avaimg.png"
 
 export const Dialogs: React.FC<DialogsPropsType> = (props) => {
    const { dialogPage } = props
@@ -37,7 +38,8 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
    const dialogsItem = dialogPage.dialogs.map((dialog) =>
       <DialogItem key={dialog.id} active={activeDialogId === dialog.id} dialog={dialog} setDialogIsOpen={setDialogIsOpen} />)
    const messageElement = dialogPage.messages.map((message) =>
-      <Message key={message.id} message={message} removeMessage={removeMessage} photo={activeDialog?.photos.small} myPhoto={myPhoto} myId={myId} />)
+      <Message key={message.id} message={message} removeMessage={removeMessage} photo={activeDialog?.photos.small} 
+      myPhoto={myPhoto ? myPhoto : ava} myId={myId} />)
 
    return (
       <div className={s.dialogs}>

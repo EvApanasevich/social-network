@@ -52,7 +52,7 @@ let initialState = {
         {id: v1(), message: 'yo, yo', likes: 5},
         {id: v1(), message: 'ya-hu-how!', likes: 7}
     ] as Array<PostType>,
-    userProfile: {} as UserProfileType,
+    userProfile: null as UserProfileType | null,
     editForm: false,
     status: ''
 }
