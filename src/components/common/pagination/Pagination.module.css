@@ -11,4 +11,15 @@
 }
 .pages span {
    cursor: pointer;
+   font-size: 15px;
+   font-weight: 500;
+   color: #0071ff;
+}
+.arrow {
+   color: crimson;
+   font-size: 15px;
+   font-weight: 500;
+   cursor: pointer;
+   margin-left: 10px;
+   margin-right: 10px;
 }

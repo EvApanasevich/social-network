@@ -1,6 +1,6 @@
 import React from "react";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {Input} from "../common/form-elements/FormElements";
+import {Checkbox, Input} from "../common/form-elements/FormElements";
 import {maxLength100, required} from "../../utils/validators/validators";
 import s from "./Login.module.css";
 import {Button} from "../common/buttons/Button";
@@ -29,7 +29,7 @@ const LoginForm: React.FC<InjectedFormProps<FormType, OwnPropsType> & OwnPropsTy
                 />
             </div>
             <div className={style.checkbox}>
-                <Field component={Input}
+                <Field component={Checkbox}
                        name={'rememberMe'}
                        type={'checkbox'}
                 />

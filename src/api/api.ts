@@ -5,8 +5,8 @@ const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     withCredentials: true,
     headers: {
-        'API-KEY': 'b173ba34-22d3-4323-a92a-0dbd941b56f3'     //EvgenSamuraj
-        //'API-KEY': '6a795579-4777-4823-b36d-7e83af06d2e8'       //EvgenSamuraj33
+        //'API-KEY': 'b173ba34-22d3-4323-a92a-0dbd941b56f3'     //EvgenSamuraj
+        'API-KEY': '6a795579-4777-4823-b36d-7e83af06d2e8'       //EvgenSamuraj33
     }
 })
 
@@ -52,8 +52,8 @@ export const dialogsApi = {
    sendMessage(id: number | null, body: string) {
       return instance.post(`dialogs/${id}/messages`, {body})
    },
-   getMessages(id: number | null) {
-      return instance.get(`dialogs/${id}/messages`)
+   getMessages(id: number | null,  messagesCurrentPage: number, messagesCount: number) {
+      return instance.get(`dialogs/${id}/messages?page=${messagesCurrentPage}&count=${messagesCount}`)
    },
    deleteMessage(id: string) {
       return instance.delete(`dialogs/messages/${id}`)

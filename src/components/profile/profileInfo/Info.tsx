@@ -15,16 +15,16 @@ export const Info: FC<InfoType> = (props) => {
     return (
         <div className={s.info}>
             <div>
-                <u>"Full name" :</u>
+                <u>"Full name" : </u>
                 {userProfile?.fullName ? userProfile.fullName : 'not indicated'}</div>
             <div>
-                <u>"About me" :</u>
+                <u>"About me" : </u>
                 {userProfile?.aboutMe ? userProfile.aboutMe : 'not indicated'}</div>
             <div>
-                <u>"Loking for a job" :</u>
+                <u>"Loking for a job" : </u>
                 {userProfile?.lookingForAJob ? 'yes' : 'no'}</div>
             <div>
-                <u>"My professional skills" :</u>
+                <u>"My professional skills" : </u>
                 {userProfile?.lookingForAJobDescription ? userProfile.lookingForAJobDescription : 'not indicated'}
             </div>
             {isOwner && <div><Button onClickHandler={onEditMode} buttonName={'Edit information'}/></div>}

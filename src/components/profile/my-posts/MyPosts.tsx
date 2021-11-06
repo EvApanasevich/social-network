@@ -5,7 +5,6 @@ import {PostType} from "../../../redux/profilePageReducer";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Button} from "../../common/buttons/Button";
 import {Textarea} from "../../common/form-elements/FormElements";
-import {maxLength10, required} from "../../../utils/validators/validators";
 
 type PropsType = {
     posts: Array<PostType>
@@ -53,10 +52,9 @@ const AddPostForm: React.FC<InjectedFormProps<FormPostDataType>> = (props) => {
         <form onSubmit={props.handleSubmit}>
 
             <div>
-                <Field placeholder={'enter your post'}
-                       name={'newPost'}
+                <Field placeholder={'type new post...'}
+                       name={'myPostForm'}
                        component={Textarea}
-                       validate={[required, maxLength10]}
                 />
                 <Button buttonName={'add post'}/>
             </div>
@@ -65,5 +63,5 @@ const AddPostForm: React.FC<InjectedFormProps<FormPostDataType>> = (props) => {
 }
 
 export const AddPostReduxForm = reduxForm<FormPostDataType>({
-    form: 'MyPostForm'  // уникальное имя для формы
+    form: 'myPostForm'  // уникальное имя для формы
 })(AddPostForm)

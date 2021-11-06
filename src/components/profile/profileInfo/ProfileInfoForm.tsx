@@ -1,6 +1,6 @@
 import {UserProfileType} from "../../../redux/profilePageReducer";
 import React from "react";
-import {Input, Textarea} from "../../common/form-elements/FormElements";
+import {Checkbox, Input, Textarea} from "../../common/form-elements/FormElements";
 import {maxLength100, required} from "../../../utils/validators/validators";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Button} from "../../common/buttons/Button";
@@ -25,19 +25,19 @@ const ProfileInfoForm: React.FC<InjectedFormProps<InfoFormType, OwnPropsType> & 
             />
             </div>
             <div>
-                <u>"AboutMe" :</u><Field placeholder={'enter text...'}
+                <u>"About me" :</u><Field placeholder={'enter text...'}
                                          name={'aboutMe'}
                                          component={Textarea}
             />
             </div>
             <div>
-                <u>"LookingForAJob" :</u><Field name={'lookingForAJob'}
-                                                component={Input}
+                <u>"Looking for a job" :</u><Field name={'lookingForAJob'}
+                                                component={Checkbox}
                                                 type={'checkbox'}
             />
             </div>
             <div>
-                <u>"LookingForAJobDescription" :</u><Field placeholder={'enter text...'}
+                <u>"My professional skills" :</u><Field placeholder={'enter text...'}
                                                            name={'lookingForAJobDescription'}
                                                            component={Textarea}
             />

@@ -1,5 +1,5 @@
 import React from "react";
-import ava from './../../../../assets/images/Avaimg.png'
+import ava from '../../../../assets/images/notAva.png'
 import s from "./Post.module.css"
 
 type PropsType = {
@@ -18,12 +18,12 @@ export const Post: React.FC<PropsType> = (props) => {
     return (
         <div className={s.post_item}>
             <img alt={''} src={profilePhoto ? profilePhoto : ava}/>
-            <span className={s.post}>
+            <div className={s.post}>
                 {message}
-            </span>
-            <span className={s.like}>
+            </div>
+            <div className={s.like}>
                 likes: {likes}
-            </span>
+            </div>
         </div>
     )
 }

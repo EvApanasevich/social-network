@@ -5,7 +5,8 @@ type PaginationPropsType = {
     totalCount: number
     count: number
     currentPage: number
-    requestUsers: (currentPage: number, current: number) => void
+    pagesInBlock: number
+    requestElements: (currentPage: number, count: number) => void
 }
 
 export const Pagination = (props: PaginationPropsType) => {
@@ -13,12 +14,12 @@ export const Pagination = (props: PaginationPropsType) => {
         totalCount,
         count,
         currentPage,
-        requestUsers
+        requestElements,
+        pagesInBlock
     } = props
 
     const pagesCount = Math.ceil(totalCount / count)
     const numbersOfPages = []
-    const pagesInBlock = 10
 
     for (let i = 1; i <= pagesCount; i++) {
         numbersOfPages.push(i)
@@ -29,42 +30,43 @@ export const Pagination = (props: PaginationPropsType) => {
 
     const prev = useCallback(() => {
         if (currentPage > pagesInBlock) {
-            requestUsers(currentPagesBlock - pagesInBlock + 1, count)
+            requestElements(currentPagesBlock - pagesInBlock + 1, count)
         }
-    }, [currentPage, pagesInBlock, requestUsers, currentPagesBlock, count])
+    }, [currentPage, pagesInBlock, requestElements, currentPagesBlock, count])
     const next = useCallback(() => {
         if (currentPagesBlock + pagesInBlock < numbersOfPages.length) {
-            requestUsers(currentPagesBlock + pagesInBlock + 1, count)
+            requestElements(currentPagesBlock + pagesInBlock + 1, count)
         }
-    }, [currentPage, pagesInBlock, pagesCount, requestUsers, currentPagesBlock, count])
+    }, [currentPage, pagesInBlock, pagesCount, requestElements, currentPagesBlock, count])
 
     const startPage = () => {
-        requestUsers(1, count)
+        requestElements(1, count)
     }
     const endPage = () => {
-        requestUsers(pagesCount, count)
+        requestElements(pagesCount, count)
     }
 
-    return (<div className={s.users_page}>
+    return (
+        <div className={s.users_page}>
             <div className={s.pages}>
 
                 <div style={{margin: '10px'}} onClick={startPage}> {'<< first page'} </div>
 
                 <div style={{display: "flex", margin: '10px'}}>
                     {currentPage > pagesInBlock &&
-                    <div style={{marginRight: '20px'}} onClick={prev}> {'<=='} </div>}
+                    <div className={s.arrow} onClick={prev}> {'<=='} </div>}
 
                     {numbersOfPages.slice(currentPagesBlock, currentPagesBlock + pagesInBlock).map(p => {
                         return <span
                             style={{padding: ' 0 5px 0 5px'}}
                             key={p}
-                            onClick={() => requestUsers(p, count)}
+                            onClick={() => requestElements(p, count)}
                             className={currentPage === p ? s.selectedPage : ''}>
                     {p} </span>
                     })}
 
                     {currentPagesBlock + pagesInBlock < numbersOfPages.length &&
-                    <div style={{marginLeft: '20px'}} onClick={next}> {'==>'} </div>}
+                    <div className={s.arrow} onClick={next}> {'==>'} </div>}
                 </div>
 
                 <div style={{margin: '10px'}} onClick={endPage}> {'last page >>'} </div>

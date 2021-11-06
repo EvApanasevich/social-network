@@ -3,7 +3,7 @@ import React, {ChangeEvent, FC} from "react";
 import {UserProfileType} from "../../../redux/profilePageReducer";
 import {Preloader} from "../../common/preloader/Preloader";
 import {ProfileStatus} from "./ProfileStatus";
-import ava from '../../../assets/images/Avaimg.png'
+import ava from '../../../assets/images/notAva.png'
 import ProfileInfoForm, {InfoFormType} from "./ProfileInfoForm";
 import {Info} from "./Info";
 
@@ -42,12 +42,12 @@ export const ProfileInfo: FC<PropsType> = (props) => {
     return (
         <div className={s.profileInfoBlock}>
             <div>
-                {!loading && userProfile ?
-                    <img alt={''}
-                         style={{width: '300px', height: '300px'}}
-                         src={userProfile.photos.large ? userProfile.photos.large : ava}/> :
-                    <Preloader/>
-                }
+                <div  className={s.photo}>
+                    {!loading && userProfile ?
+                        <img alt={''} src={userProfile.photos.large ? userProfile.photos.large : ava}/>
+                        : <Preloader/>
+                    }
+                </div>
                 <div>
                     {isOwner && <input type={'file'} onChange={photoSelected}/>}
                 </div>

@@ -1,0 +1,5 @@
+.usersBlock {
+    max-height: 92vh;
+    overflow: scroll;
+    overflow-x: hidden;
+}

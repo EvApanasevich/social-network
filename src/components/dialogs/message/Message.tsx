@@ -1,5 +1,6 @@
 import React from 'react'
 import s from './Message.module.css'
+import del from '../../../assets/images/delete.png'
 import { MessageType } from "../../../redux/dialogPageReducer"
 
 type PropsType = {
@@ -32,8 +33,7 @@ export const Message: React.FC<PropsType> = (props) => {
                </div>
             </div>
          </div>
-         <div onClick={() => removeMessage(message.id)} className={s.x}>
-            X
+         <div onClick={() => removeMessage(message.id)} className={s.delete}>
          </div>
       </div>
    )

@@ -1,4 +1,5 @@
 import React from 'react'
+import s from './Users.module.css'
 import {UserType} from "../../redux/usersReducer";
 import {User} from "../user/User";
 import {Preloader} from "../common/preloader/Preloader";
@@ -31,12 +32,13 @@ export const Users = (props: PropsType) => {
 
 
     return (
-        <div>
+        <div className={s.usersBlock}>
             <Pagination
                 totalCount={totalCount}
                 count={count}
                 currentPage={currentPage}
-                requestUsers={requestUsers}
+                pagesInBlock={10}
+                requestElements={requestUsers}
             />
             {loading ?
                 <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
@@ -50,12 +52,13 @@ export const Users = (props: PropsType) => {
                         followingProgress={followingProgress}
                     />
                 )}
-            <Pagination
+            {!loading && <Pagination
                 totalCount={totalCount}
                 count={count}
                 currentPage={currentPage}
-                requestUsers={requestUsers}
-            />
+                pagesInBlock={10}
+                requestElements={requestUsers}
+            />}
         </div>
     )
 }

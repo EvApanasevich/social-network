@@ -7,13 +7,15 @@
 }
 
 .dialogsItems {
-    margin: 5px;
-    border: 1px solid black;
-    background-color: white;
+    max-height: 91vh;
+    overflow: scroll;
+    overflow-x: hidden;
+    background-color: #f5f8ff;
+    border-radius: 5px;
 }
 
 .dialogsItems a {
-    color: crimson;
+    color: #dc143c;
     text-decoration: none;
 }
 
@@ -22,21 +24,38 @@
     font-weight: bold;
 }
 
-.messages {
+.messages_block {
     width: 100%;
-    margin: 5px 5px 5px 0px;
-    border: 1px solid black;
-    background-color: white;
-    right: 0;
+    background-color: #f5f8ff;
+    border-radius: 5px;
 }
 
-.message_block {
+.messages {
+    height: 70vh;
+    overflow: scroll;
+    overflow-x: hidden;
+    margin-bottom: 20px;
+    border-radius: 3px;
+    background-color: white;
+    right: 0;
+    border: 2px solid #e5edfd;
+}
+
+.empty {
+    color: #000065;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+
+.messages_elements {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    margin: 5px 5px 5px 0px;
-    border: 1px solid black;
+    justify-content: space-between;
+    width: 90%;
+    height: 90%;
+    margin-left: 25px;
 }
+
 
 .input_message {
     display: flex;
@@ -45,9 +64,24 @@
 }
 
 .input_message textarea {
-
+    width: 27vw;
 }
 
 .input_message button {
     margin: 0 0 5px 5px;
 }
+
+.text {
+    margin: 0 auto;
+    padding-top: 100px;
+    font-size: 20px;
+    font-weight: 400;
+    color: #000065;
+}
+
+.text img {
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+}
+

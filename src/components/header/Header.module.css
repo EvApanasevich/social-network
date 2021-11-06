@@ -3,9 +3,11 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    background-color: white;
+    background-color: crimson;
     margin-top: 10px;
-    border: 1px solid black;
+    /*border: 1px solid black;*/
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.25), 0 1px 1px rgba(0,0,0,0.22);
 }
 
 .headerContainer {
@@ -16,7 +18,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: crimson;
+    color: #f5f8ff;
     font-size: 20px;
     margin-left: 50px;
 }

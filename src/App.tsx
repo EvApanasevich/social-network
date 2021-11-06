@@ -52,8 +52,6 @@ class App extends React.Component<PropsType> {
                                 <UsersContainer/>
                             </Suspense>
                         }}/>
-                        <Route path='/music' render={() => <Music/>}/>
-                        <Route path='/news' render={() => <News/>}/>
                         <Route path='/settings' render={() => <Settings/>}/>
                         <Route path='/login' render={() => <Login/>}/>
                         <Route path='/social-network' render={() => <Redirect to={'/profile'}/>}/>

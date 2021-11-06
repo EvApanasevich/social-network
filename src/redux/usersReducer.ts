@@ -50,7 +50,7 @@ export type PhotosType = {
 
 const initialState: UsersPageType = {
     users: [],
-    count: 50,
+    count: 20,
     totalCount: 0,
     currentPage: 1,
     loading: false,

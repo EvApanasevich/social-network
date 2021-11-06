@@ -1,43 +1,45 @@
 .navbar {
-   grid-area: n;
-   background-color: white;
-   margin: 10px 5px 0px 0px;
-   border: 1px solid black;
+    grid-area: n;
+    background-color: #e5edfd;
+    margin: 10px 5px 0px 0px;
 }
 
 .navbarItems {
-   margin: 5px;
-   border: 1px solid black;
-   padding: 10px;
-   background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #f5f8ff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.25), 0 1px 1px rgba(0,0,0,0.22);
 }
 
 .navbar h3 {
-   text-align: center;
-   color: crimson;
+    text-align: center;
+    color: crimson;
+    text-shadow: 1px 2px 2px rgba(0,0,0,0.25);
 }
 
 .item a {
-   color: #4b4b4b;
-   text-decoration: none;
+    color: #4b4b4b;
+    text-decoration: none;
 }
+
 .item a.active {
-   color: crimson;
-   font-size: 18px;
-   font-weight: 500;
+    color: crimson;
+    font-size: 18px;
+    font-weight: 500;
 }
 
 .friends {
-   display: grid;
-   grid-template-columns: 1fr 1fr 1fr;
-   grid-template-rows: 2fr 2fr;
-   padding-top: 10px;
-   text-align: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 2fr 2fr;
+    padding-top: 10px;
+    text-align: center;
 }
 
 .listFriends {
-   margin: 5px;
-   border: 1px solid black;
-   padding: 10px;
-   background-color: white;
+    /*border: 1px solid black;*/
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #f5f8ff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.25), 0 1px 1px rgba(0,0,0,0.22);
 }
