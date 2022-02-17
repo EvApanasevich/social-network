@@ -96,7 +96,7 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Pr
     }
 }
 
-///////////////////////////////////////////////// action creators //////////////////////////////
+///////////////////////////////////////////////// action creators /////////////////////////////
 
 export const addPost = (newMessagePost: string) => {
     return {type: ADD_NEW_POST, newMessagePost: newMessagePost} as const
@@ -141,7 +141,6 @@ export const updateStatus = (status: string): AppThunkType => async dispatch => 
             dispatch(setStatus(status))
         }
     } catch (error) {
-        debugger
     }
 }
 
